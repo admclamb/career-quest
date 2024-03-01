@@ -1,11 +1,8 @@
-import ModeToggle from "./features/theme/mode-toggle";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./pages/router";
 
 const App = () => {
-  return (
-    <div>
-      <ModeToggle />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
