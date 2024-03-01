@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
 import landing1 from "./undraw_learning_sketching_nd4f.svg";
 import landing2 from "./undraw_projections_re_ulc6.svg";
+import AuthSignupButton from "@/features/auth/auth-signup-button/auth-signup-button";
 
 const Home = () => {
   return (
@@ -34,15 +35,9 @@ const Home = () => {
               never miss a follow-up or deadline again.
             </p>
             <div>
-              <Link
-                to="/signup"
-                className={cn(
-                  buttonVariants({ variant: "default" }),
-                  "drop-shadow"
-                )}
-              >
-                Sign up now for free
-              </Link>
+              <AuthSignupButton variant="default" className="drop-shadow">
+                Sign up for free
+              </AuthSignupButton>
             </div>
           </section>
           <section className="flex flex-col justify-center gap-5">
@@ -52,7 +47,7 @@ const Home = () => {
             <p className="text-muted-foreground">
               Begin your job search journey with our free online account,
               offering essential tracking functionalities to organize your
-              applications efficiently. When you’re ready for more, unlock
+              applications efficiently. When you&apos;re ready for more, unlock
               unlimited potential by providing your MongoDB URL or by cloning
               and running our repository locally. This unique flexibility allows
               you to maintain full control over your data while enjoying the
@@ -62,7 +57,7 @@ const Home = () => {
             </p>
             <div>
               <Link
-                to="/signup"
+                to="/demo"
                 className={cn(
                   buttonVariants({ variant: "default" }),
                   "drop-shadow"

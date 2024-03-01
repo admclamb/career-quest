@@ -1,4 +1,5 @@
 import { buttonVariants } from "@/components/ui/button";
+import AuthLoginButton from "@/features/auth/auth-login-button/auth-login-button";
 import Container from "@/layout/container/container";
 import LandingNavbar from "@/layout/layout-landing/landing-navbar/landing-navbar";
 import { cn } from "@/lib/utils";
@@ -37,12 +38,7 @@ const Hero = () => {
               >
                 Sign up for free
               </Link>
-              <Link
-                to="/signup"
-                className={buttonVariants({ variant: "outline" })}
-              >
-                Sign up for free
-              </Link>
+              <AuthLoginButton variant="outline">Log in here</AuthLoginButton>
             </div>
           </div>
         </div>
