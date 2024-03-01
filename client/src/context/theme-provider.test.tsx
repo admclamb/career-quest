@@ -1,12 +1,4 @@
-import {
-  Mock,
-  afterEach,
-  beforeEach,
-  describe,
-  expect,
-  test,
-  vi,
-} from "vitest";
+import { Mock, beforeEach, describe, expect, test, vi } from "vitest";
 import { ThemeProvider } from "./theme-provider";
 import { render } from "@testing-library/react";
 
