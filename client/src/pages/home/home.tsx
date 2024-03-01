@@ -10,7 +10,7 @@ const Home = () => {
     <LayoutLanding>
       <Hero />
       <section className="border-t  bg-muted">
-        <Container className="grid grid-cols-2 py-20 gap-20">
+        <Container className="grid grid-cols-1 lg:grid-cols-2 py-20 gap-20">
           <section className="h-[35rem] w-full border rounded"></section>
           <section className="flex flex-col justify-center -mt-[5%] gap-5">
             <h3 className="text-2xl font-bold">
