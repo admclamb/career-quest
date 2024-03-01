@@ -2,7 +2,7 @@ import Container from "../container/container";
 
 const Footer = () => {
   return (
-    <div className="p-9 bg-foreground text-muted-foreground border-t">
+    <div className="p-9 bg-foreground-muted text-muted-foreground border-t">
       <Container>
         <ul className="flex justify-between">
           <li>&copy; Career Quest 2023</li>
