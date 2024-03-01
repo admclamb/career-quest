@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import Container from "../container/container";
 import ModeToggle from "@/features/theme/mode-toggle";
+import AuthLogoutButton from "@/features/auth/auth-logout-button/auth-logout-button";
+import { buttonVariants } from "@/components/ui/button";
 
 const Navbar = () => {
   return (
@@ -13,12 +15,17 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
-        <ul className="flex items-center gap-7">
+        <ul className="flex items-center gap-3">
           <li>
-            <Link to="/">Home</Link>
+            <Link
+              to="/dashboard"
+              className={buttonVariants({ variant: "ghost" })}
+            >
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/test">Test</Link>
+            <AuthLogoutButton variant="outline">Log out</AuthLogoutButton>
           </li>
           <li>
             <ModeToggle />
