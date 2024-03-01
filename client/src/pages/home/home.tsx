@@ -4,6 +4,8 @@ import Container from "@/layout/container/container";
 import LayoutLanding from "@/layout/layout-landing/layout-landing";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
+import landing1 from "./undraw_learning_sketching_nd4f.svg";
+import landing2 from "./undraw_projections_re_ulc6.svg";
 
 const Home = () => {
   return (
@@ -11,7 +13,13 @@ const Home = () => {
       <Hero />
       <section className="border-t  bg-muted">
         <Container className="grid grid-cols-1 lg:grid-cols-2 py-20 gap-20">
-          <section className="h-[35rem] w-full border rounded"></section>
+          <section className="h-[35rem] w-full overflow-hidden">
+            <img
+              src={landing1}
+              alt="Ovewhelming computer image"
+              className="w-full h-full"
+            />
+          </section>
           <section className="flex flex-col justify-center -mt-[5%] gap-5">
             <h3 className="text-2xl font-bold">
               All Your Job Applications, One Dashboard
@@ -64,7 +72,13 @@ const Home = () => {
               </Link>
             </div>
           </section>
-          <section className="h-[35rem] w-full border rounded"></section>
+          <section className="h-[35rem] w-full overflow-hidden">
+            <img
+              src={landing2}
+              alt="Ovewhelming computer image"
+              className="w-full h-full"
+            />
+          </section>
         </Container>
       </section>
     </LayoutLanding>
