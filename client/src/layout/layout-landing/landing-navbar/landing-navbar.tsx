@@ -15,9 +15,7 @@ const LandingNavbar = () => {
         </ul>
         <ul className="flex items-center gap-5 z-50">
           <li>
-            <Link to="/login" className="text-white">
-              Log in
-            </Link>
+            <Link to="/login">Log in</Link>
           </li>
           <li>
             <Link
