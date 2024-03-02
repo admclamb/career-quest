@@ -22,6 +22,14 @@ export class BoardService {
     return this.boardRepository.save(board);
   }
 
+  findOneById(boardId: number): Promise<Board> {
+    if (!boardId) {
+      return null;
+    }
+
+    return this.boardRepository.findOneBy({ id: boardId });
+  }
+
   findAllPageable(
     paginationDto: PaginationDto,
     userSub: string,

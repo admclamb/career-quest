@@ -3,11 +3,16 @@ import Home from "./home/home";
 import NotFound from "./not-found/not-found";
 import { AuthenticationGuard } from "@/guards/authentication-guard";
 import Dashboard from "./dashboard/dashboard";
+import Board from "./dashboard/board/board";
 
 const PageRoutes = () => {
   return (
     <Routes>
       <Route index element={<Home />} />
+      <Route
+        path="dashboard/board/:boardId"
+        element={<AuthenticationGuard component={Board} />}
+      />
       <Route
         path="dashboard"
         element={<AuthenticationGuard component={Dashboard} />}

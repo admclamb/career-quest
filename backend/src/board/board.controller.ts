@@ -46,6 +46,30 @@ export class BoardController {
   }
 
   @UseGuards(AuthorizationGuard)
+  @Get('find')
+  async findBoard(
+    @Query() { boardId },
+    @Req() request: Request,
+  ): Promise<Board> {
+    const userSub = request.auth.payload.sub;
+    if (!userSub) {
+      throw new HttpException(
+        'A user sub is required.',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const response = await this.boardService.findOneById(boardId);
+
+    if (!response || response.userSub !== userSub) {
+      throw new HttpException('Board not found.', HttpStatus.NOT_FOUND);
+    }
+
+    response.removePrivateProperties();
+    return response;
+  }
+
+  @UseGuards(AuthorizationGuard)
   @Post()
   async createBoard(
     @Body() createBoardDto: CreateBoardDto,
