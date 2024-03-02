@@ -19,6 +19,9 @@ export class Board {
   @OneToMany(() => BoardColumn, (boardColumn) => boardColumn.board)
   columns: BoardColumn[];
 
+  @Column({ nullable: false })
+  userSub: string;
+
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
