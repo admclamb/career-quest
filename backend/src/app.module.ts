@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BoardModule } from './board/board.module';
 import entities from './data-model/entities';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import entities from './data-model/entities';
       inject: [ConfigService],
     }),
     BoardModule,
+    CommonModule,
   ],
   controllers: [],
   providers: [],
