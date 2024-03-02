@@ -25,7 +25,7 @@ export const useBoardCreate = () => {
     const [data, apiError] = await boardService.createBoard(title, accessToken);
 
     if (data) {
-      navigate(`dashboard/board/${data.id}`);
+      navigate(`/dashboard/board/${data.id}`);
     }
 
     if (apiError) {

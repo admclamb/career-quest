@@ -67,7 +67,7 @@ export class BoardService {
 
     const rejectedColumn = new BoardColumn();
     rejectedColumn.label = 'Rejected';
-    offerColumn.order = 4;
+    rejectedColumn.order = 4;
 
     return [
       whishlistColumn,
