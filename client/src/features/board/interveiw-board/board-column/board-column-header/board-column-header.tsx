@@ -5,6 +5,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import JobCreate from "@/features/job/job-create/job-create";
 import { BoardColumnModel } from "@/models/board-column-model";
 import { MoreHorizontal, Plus } from "lucide-react";
 
@@ -29,9 +30,7 @@ const BoardColumnHeader = ({ column }: Props) => {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <Button variant="outline" className="drop-shadow py-1">
-        <Plus />
-      </Button>
+      <JobCreate column={column} />
     </div>
   );
 };

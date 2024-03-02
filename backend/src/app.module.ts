@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { BoardModule } from './board/board.module';
 import entities from './data-model/entities';
 import { CommonModule } from './common/common.module';
+import { JobModule } from './job/job.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { CommonModule } from './common/common.module';
     }),
     BoardModule,
     CommonModule,
+    JobModule,
   ],
   controllers: [],
   providers: [],
