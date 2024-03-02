@@ -16,7 +16,9 @@ export class Board {
   @Column({ nullable: false, length: 50 })
   title: string;
 
-  @OneToMany(() => BoardColumn, (boardColumn) => boardColumn.board)
+  @OneToMany(() => BoardColumn, (boardColumn) => boardColumn.board, {
+    cascade: true,
+  })
   columns: BoardColumn[];
 
   @Column({ nullable: false })

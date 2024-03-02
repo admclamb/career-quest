@@ -13,6 +13,7 @@ export const useBoardCreate = () => {
   const navigate = useNavigate();
 
   const createBoard = async () => {
+    setError(null);
     setIsLoading(true);
     if (!title) {
       setError({ message: "A title is required" });
@@ -24,7 +25,7 @@ export const useBoardCreate = () => {
     const [data, apiError] = await boardService.createBoard(title, accessToken);
 
     if (data) {
-      navigate(`/board/${data.id}`);
+      navigate(`dashboard/board/${data.id}`);
     }
 
     if (apiError) {
