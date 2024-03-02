@@ -1,26 +1,25 @@
-import Container from "@/layout/container/container";
-import Layout from "@/layout/layout";
 import { useParams } from "react-router-dom";
 import { useBoard } from "./board.hooks";
 import PageLoader from "@/components/loader/page-loader/page-loader";
-import ErrorAlert from "@/errors/error-alert/error-alert";
+import InterviewBoard from "@/features/board/interveiw-board/interview-board";
+import LayoutSidebar from "@/layout/layout-sidebar/layout-sidebar";
+import ErrorAlertFixed from "@/errors/error-alert-fixed/error-alert-fixed";
 
 const Board = () => {
   const { boardId } = useParams();
-  const { board, isLoading, error } = useBoard(boardId ? +boardId : null);
+  const { board, isLoading, error, setError } = useBoard(
+    boardId ? +boardId : null
+  );
 
   if (isLoading) {
     return <PageLoader />;
   }
 
   return (
-    <Layout>
-      <Container>
-        <ErrorAlert error={error} />
-        <h1>TESTING</h1>
-        {JSON.stringify(board)}
-      </Container>
-    </Layout>
+    <LayoutSidebar board={board}>
+      <ErrorAlertFixed error={error} setError={setError} showClose />
+      {board ? <InterviewBoard board={board} /> : null}
+    </LayoutSidebar>
   );
 };
 

@@ -41,7 +41,7 @@ export const useBoard = (boardId: number | null) => {
     return () => {
       ignore = true;
     };
-  }, [boardId]);
+  }, [boardId, getAccessTokenSilently]);
 
-  return { board, isLoading, error };
+  return { board, isLoading, error, setError };
 };
