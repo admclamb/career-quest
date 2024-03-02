@@ -27,4 +27,8 @@ export class Board {
 
   @UpdateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   updatedAt: Date;
+
+  public removePrivateProperties() {
+    this.userSub = null;
+  }
 }

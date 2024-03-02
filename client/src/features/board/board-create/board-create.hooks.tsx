@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const useBoardCreate = () => {
+  const [title, setTitle] = useState<string>("");
   const [error, setError] = useState<ErrorModel | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -12,9 +13,15 @@ export const useBoardCreate = () => {
   const navigate = useNavigate();
 
   const createBoard = async () => {
+    setIsLoading(true);
+    if (!title) {
+      setError({ message: "A title is required" });
+      return;
+    }
+
     const accessToken = await getAccessTokenSilently();
 
-    const [data, apiError] = await boardService.createBoard(accessToken);
+    const [data, apiError] = await boardService.createBoard(title, accessToken);
 
     if (data) {
       navigate(`/board/${data.id}`);
@@ -23,7 +30,12 @@ export const useBoardCreate = () => {
     if (apiError) {
       setError(apiError);
     }
+    setIsLoading(false);
   };
 
-  return { createBoard, error, setError, isLoading };
+  const changeTitle = (value: string) => {
+    setTitle(value);
+  };
+
+  return { createBoard, error, setError, isLoading, title, changeTitle };
 };

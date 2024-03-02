@@ -26,10 +26,16 @@ const getBoards = (
   return api.callExternalApi<PaginationResponse<BoardModel>>({ config });
 };
 
-const createBoard = (accessToken: string): Promise<ApiResponse<BoardModel>> => {
+const createBoard = (
+  title: string,
+  accessToken: string
+): Promise<ApiResponse<BoardModel>> => {
   const config: AxiosRequestConfig = {
     url: "/api/v1/board",
     method: "POST",
+    data: {
+      title,
+    },
     headers: {
       "content-type": "application/json",
       Authorization: `Bearer ${accessToken}`,
