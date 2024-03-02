@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { BoardColumnModel } from "@/models/board-column-model";
@@ -22,6 +24,9 @@ const BoardColumnHeader = ({ column }: Props) => {
               <MoreHorizontal size={24} />
             </Button>
           </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuCheckboxItem>Delete Column</DropdownMenuCheckboxItem>
+          </DropdownMenuContent>
         </DropdownMenu>
       </div>
       <Button variant="outline" className="drop-shadow py-1">

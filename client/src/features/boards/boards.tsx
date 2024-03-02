@@ -14,7 +14,7 @@ const Boards = () => {
       {isLoading ? (
         <p className="font-semibold">Loading...</p>
       ) : boards.length ? (
-        <ul>
+        <ul className="flex flex-col gap-5">
           {boards.map((board) => (
             <li key={board.id}>
               <Card className="flex flex-col gap-5 p-5">
