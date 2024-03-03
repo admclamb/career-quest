@@ -1,13 +1,10 @@
 import { BoardModel } from "@/models/board-model";
-import { ErrorModel } from "@/models/error-model";
 import { boardService } from "@/services/board-service";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 
 export const useBoards = () => {
   const [boards, setBoards] = useState<BoardModel[]>([]);
-  const [error, setError] = useState<ErrorModel | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [size] = useState<number>(10);
   const [timestamp] = useState<Date>(new Date());

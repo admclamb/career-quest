@@ -12,13 +12,16 @@ import {
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { BoardColumnModel } from "@/models/board-column-model";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import CompanyInputSearch from "@/features/company/company-input-search/company-input-search";
 
 type Props = {
   column: BoardColumnModel;
 };
 
 const JobCreate = ({ column }: Props) => {
-  const { error, setError, isLoading } = useJobCreate();
+  const { error, setError, isLoading, company, setCompany } = useJobCreate();
 
   return (
     <>
@@ -31,8 +34,15 @@ const JobCreate = ({ column }: Props) => {
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogHeader>Add Job</AlertDialogHeader>
+            <AlertDialogHeader>
+              <h3 className="font-semibold">Add Job</h3>
+            </AlertDialogHeader>
           </AlertDialogHeader>
+          <CompanyInputSearch company={company} setCompany={setCompany} />
+          <div className="flex flex-col gap-3">
+            <Label htmlFor="job-title">Job Title</Label>
+            <Input id="job title" placeholder="Job Title" />
+          </div>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction>Save Job</AlertDialogAction>
