@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <LayoutLanding>
       <Hero />
-      <section className="border-t  bg-muted">
+      <section className="border-t  bg-slate-100">
         <Container className="grid grid-cols-1 lg:grid-cols-2 py-20 gap-20">
           <section className="h-[35rem] w-full overflow-hidden">
             <img
@@ -25,7 +25,7 @@ const Home = () => {
             <h3 className="text-2xl font-bold">
               All Your Job Applications, One Dashboard
             </h3>
-            <p className="text-muted-foreground">
+            <p className="text-slate-500">
               Keep track of every application, from initial submission to final
               decision, with our comprehensive dashboard. Visualize your job
               search progress through interactive charts and filters that allow
@@ -35,7 +35,10 @@ const Home = () => {
               never miss a follow-up or deadline again.
             </p>
             <div>
-              <AuthSignupButton variant="default" className="drop-shadow">
+              <AuthSignupButton
+                variant={undefined}
+                className="bg-blue-600 hover:bg-blue-500 text-white hover:text-white px-3 py-2.5 rounded-md drop-shadow duration-200 text-sm"
+              >
                 Sign up for free
               </AuthSignupButton>
             </div>
@@ -44,7 +47,7 @@ const Home = () => {
             <h3 className="text-2xl font-bold">
               Free to Use with Flexible Upgrades
             </h3>
-            <p className="text-muted-foreground">
+            <p className="text-slate-500">
               Begin your job search journey with our free online account,
               offering essential tracking functionalities to organize your
               applications efficiently. When you&apos;re ready for more, unlock

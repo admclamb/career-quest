@@ -13,12 +13,13 @@ type Props = {
     | null
     | undefined;
   children?: ReactNode;
+  className?: string;
 };
-const AuthLoginButton = ({ variant = "ghost", children }: Props) => {
+const AuthLoginButton = ({ variant, children, className = "" }: Props) => {
   const { handleLogin } = useAuthLoginButton();
 
   return (
-    <Button onClick={handleLogin} variant={variant}>
+    <Button onClick={handleLogin} variant={variant} className={className}>
       {children}
     </Button>
   );

@@ -7,7 +7,7 @@ type Props = {
 
 const LayoutLanding = ({ children }: Props) => {
   return (
-    <div className="flex flex-col min-h-screen relative">
+    <div className="flex flex-col min-h-screen relative bg-white text-black">
       <main className="grow">{children}</main>
       <Footer />
     </div>

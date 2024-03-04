@@ -15,13 +15,13 @@ const Hero = () => {
         <div className="text-start flex flex-col gap-10 -mt-[10%] z-50">
           <div>
             <h1 className="text-5xl font-bold mb-3">Simplify Your Job Hunt</h1>
-            <p className="text-muted-foreground text-xl font-semibold">
+            <p className="text-slate-500 text-xl font-semibold">
               Track Your Job Applications Effortlessly and For Free.
             </p>
           </div>
 
           <div className="flex flex-col gap-3">
-            <p className="max-w-xl text-muted-foreground">
+            <p className="max-w-xl text-slate-500">
               Say goodbye to cluttered spreadsheets and costly subscription
               fees. Our Job Application Tracker is designed to streamline your
               job search process with an intuitive, user-friendly interface.
@@ -31,14 +31,16 @@ const Hero = () => {
             <div className="flex gap-3 items-center">
               <Link
                 to="/signup"
-                className={cn(
-                  buttonVariants({ variant: "default" }),
-                  "drop-shadow"
-                )}
+                className="bg-blue-600 hover:bg-blue-500 text-white px-3 py-2.5 rounded-md drop-shadow duration-200 text-sm"
               >
                 Sign up for free
               </Link>
-              <AuthLoginButton variant="outline">Log in here</AuthLoginButton>
+              <AuthLoginButton
+                variant={undefined}
+                className="px-3 py-2.5 border hover:bg-slate-100 rounded-md duration-200 text-sm"
+              >
+                Log in here
+              </AuthLoginButton>
             </div>
           </div>
         </div>

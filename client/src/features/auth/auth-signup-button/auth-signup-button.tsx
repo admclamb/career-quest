@@ -16,11 +16,7 @@ type Props = {
   className?: string;
 };
 
-const AuthSignupButton = ({
-  variant = "outline",
-  children,
-  className = "",
-}: Props) => {
+const AuthSignupButton = ({ variant, children, className = "" }: Props) => {
   const { handleSignUp } = useAuthSignupButton();
 
   return (
