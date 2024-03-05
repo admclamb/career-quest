@@ -1,11 +1,10 @@
-import { buttonVariants } from "@/components/ui/button";
-import AuthLoginButton from "@/features/auth/auth-login-button/auth-login-button";
+import { useAuthLoginButton } from "@/features/auth/auth-login-button/auth-login-button.hooks";
 import Container from "@/layout/container/container";
 import LandingNavbar from "@/layout/layout-landing/landing-navbar/landing-navbar";
-import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
 
 const Hero = () => {
+  const { handleLogin } = useAuthLoginButton();
   return (
     <section className="h-[80vh] relative overflow-hidden">
       <header>
@@ -35,12 +34,12 @@ const Hero = () => {
               >
                 Sign up for free
               </Link>
-              <AuthLoginButton
-                variant={undefined}
+              <button
                 className="px-3 py-2.5 border hover:bg-slate-100 rounded-md duration-200 text-sm"
+                onClick={handleLogin}
               >
                 Log in here
-              </AuthLoginButton>
+              </button>
             </div>
           </div>
         </div>

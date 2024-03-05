@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
 import landing1 from "./undraw_learning_sketching_nd4f.svg";
 import landing2 from "./undraw_projections_re_ulc6.svg";
-import AuthSignupButton from "@/features/auth/auth-signup-button/auth-signup-button";
 
 const Home = () => {
   return (
@@ -35,12 +34,9 @@ const Home = () => {
               never miss a follow-up or deadline again.
             </p>
             <div>
-              <AuthSignupButton
-                variant={undefined}
-                className="bg-blue-600 hover:bg-blue-500 text-white hover:text-white px-3 py-2.5 rounded-md drop-shadow duration-200 text-sm"
-              >
+              <button className="bg-blue-600 hover:bg-blue-500 text-white hover:text-white px-3 py-2.5 rounded-md drop-shadow duration-200 text-sm">
                 Sign up for free
-              </AuthSignupButton>
+              </button>
             </div>
           </section>
           <section className="flex flex-col justify-center gap-5">

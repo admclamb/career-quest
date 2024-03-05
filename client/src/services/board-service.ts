@@ -2,7 +2,6 @@ import { ApiResponse } from "@/models/api-repsonse-model";
 import { BoardModel } from "@/models/board-model";
 import { PaginationResponse } from "@/models/pagination-response";
 import { AxiosRequestConfig } from "axios";
-import api from "./api";
 
 const findBoardById = (
   accessToken: string,
