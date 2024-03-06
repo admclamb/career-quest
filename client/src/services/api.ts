@@ -1,6 +1,4 @@
-import { ApiResponse } from "@/models/api-repsonse-model";
-import { ErrorModel } from "@/models/error-model";
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 const axiosApi = axios.create({
   baseURL: import.meta.env.VITE_API_SERVER_URL ?? "",
@@ -9,50 +7,9 @@ const axiosApi = axios.create({
 
 const callExternalApi = async <T>(options: {
   config: AxiosRequestConfig;
-}): Promise<ApiResponse<T>> => {
-  try {
-    const response: AxiosResponse = await axiosApi(options.config);
-    const { data } = response;
-
-    return [data, null];
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error.message === "Request aborted" || error.message === "canceled") {
-        return [null, null];
-      }
-      const axiosError = error as AxiosError;
-
-      const { response } = axiosError;
-
-      let message = "http request failed";
-
-      if (response && response.statusText) {
-        message = response.statusText;
-      }
-
-      if (axiosError.message) {
-        message = axiosError.message;
-      }
-
-      if (response && response.data && (response.data as ErrorModel).message) {
-        message = (response.data as ErrorModel).message;
-      }
-
-      return [
-        null,
-        {
-          message,
-        },
-      ];
-    }
-
-    return [
-      null,
-      {
-        message: (error as Error).message,
-      },
-    ];
-  }
+}): Promise<T> => {
+  const response: AxiosResponse = await axiosApi(options.config);
+  return response.data;
 };
 
 const api = {

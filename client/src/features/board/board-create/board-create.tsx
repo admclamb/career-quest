@@ -16,12 +16,12 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 
 const BoardCreate = () => {
-  const { createBoard, error, setError, isLoading, title, changeTitle } =
+  const { createBoard, error, isLoading, title, changeTitle } =
     useBoardCreate();
 
   return (
     <>
-      <ErrorAlertFixed error={error} setError={setError} showClose />
+      <ErrorAlertFixed error={error} showClose />
       <AlertDialog>
         <AlertDialogTrigger asChild>
           <Button variant="default">Create Board</Button>

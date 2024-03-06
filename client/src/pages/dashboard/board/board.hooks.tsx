@@ -1,47 +1,27 @@
-import { BoardModel } from "@/models/board-model";
-import { ErrorModel } from "@/models/error-model";
 import { boardService } from "@/services/board-service";
 import { useAuth0 } from "@auth0/auth0-react";
-import { appendFile } from "fs";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 export const useBoard = (boardId: number | null) => {
   const { getAccessTokenSilently } = useAuth0();
-  const [board, setBoard] = useState<BoardModel | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<ErrorModel | null>(null);
 
-  useEffect(() => {
-    let ignore = false;
+  const getBoard = async () => {
+    const accessToken = await getAccessTokenSilently();
 
     if (!boardId) {
-      setError({ message: "A board id is required" });
-      return;
+      throw new Error("Board id is required");
     }
 
-    (async () => {
-      setIsLoading(true);
-      const accessToken = await getAccessTokenSilently();
+    return boardService.findBoardById(accessToken, boardId);
+  };
+  const {
+    data: board,
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["board", boardId],
+    queryFn: getBoard,
+  });
 
-      const [data, apiError] = await boardService.findBoardById(
-        accessToken,
-        boardId
-      );
-
-      if (data && !ignore) {
-        setBoard(data);
-      }
-
-      if (apiError && !ignore) {
-        setError(apiError);
-      }
-      setIsLoading(false);
-    })();
-
-    return () => {
-      ignore = true;
-    };
-  }, [boardId, getAccessTokenSilently]);
-
-  return { board, isLoading, error, setError };
+  return { board, isLoading, error };
 };

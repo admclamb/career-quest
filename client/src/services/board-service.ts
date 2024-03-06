@@ -1,12 +1,12 @@
-import { ApiResponse } from "@/models/api-repsonse-model";
 import { BoardModel } from "@/models/board-model";
 import { PaginationResponse } from "@/models/pagination-response";
 import { AxiosRequestConfig } from "axios";
+import api from "./api";
 
 const findBoardById = (
   accessToken: string,
   boardId: number
-): Promise<ApiResponse<BoardModel>> => {
+): Promise<BoardModel> => {
   const config: AxiosRequestConfig = {
     url: "/api/v1/board/find",
     params: {
@@ -26,7 +26,7 @@ const getBoards = (
   page: number,
   size: number,
   timestamp: Date
-): Promise<ApiResponse<PaginationResponse<BoardModel>>> => {
+): Promise<PaginationResponse<BoardModel>> => {
   const config: AxiosRequestConfig = {
     url: "/api/v1/board",
     params: {
@@ -46,7 +46,7 @@ const getBoards = (
 const createBoard = (
   title: string,
   accessToken: string
-): Promise<ApiResponse<BoardModel>> => {
+): Promise<BoardModel> => {
   const config: AxiosRequestConfig = {
     url: "/api/v1/board",
     method: "POST",
@@ -63,9 +63,9 @@ const createBoard = (
 };
 
 const boardService = {
+  findBoardById,
   getBoards,
   createBoard,
-  findBoardById,
 };
 
 Object.freeze(boardService);

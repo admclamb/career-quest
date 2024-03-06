@@ -1,15 +1,18 @@
 import { X } from "lucide-react";
+import { useState } from "react";
 
 type Props = {
   error?: { message: string } | null;
   showClose?: boolean;
-  setError: React.Dispatch<React.SetStateAction<{ message: string } | null>>;
 };
 
-const ErrorAlertFixed = ({ error, showClose, setError }: Props) => {
+const ErrorAlertFixed = ({ error, showClose }: Props) => {
+  const [isClosed, setIsClosed] = useState<boolean>(false);
+
   return (
     error &&
-    error.message && (
+    error.message &&
+    !isClosed && (
       <div
         className={`${
           showClose ? "pl-3 pr-1 py-2" : "p-3"
@@ -19,7 +22,7 @@ const ErrorAlertFixed = ({ error, showClose, setError }: Props) => {
         {showClose && (
           <button
             className="w-9 h-9 rounded hover:bg-red-300 actve:bg-red-400 ease-out duration-200 flex justify-center items-center"
-            onClick={() => setError(null)}
+            onClick={() => setIsClosed(true)}
           >
             <X size={16} />
           </button>

@@ -19,7 +19,7 @@ const Dashboard = () => {
             <BoardCreate />
           </div>
 
-          {/* <Boards /> */}
+          <Boards />
         </Card>
       </Container>
     </Layout>

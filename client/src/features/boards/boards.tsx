@@ -13,7 +13,7 @@ const Boards = () => {
       <ErrorAlert error={error} />
       {isLoading ? (
         <p className="font-semibold">Loading...</p>
-      ) : boards.length ? (
+      ) : boards?.length ? (
         <ul className="flex flex-col gap-5">
           {boards.map((board) => (
             <li key={board.id}>

@@ -1,5 +1,4 @@
 import { buttonVariants } from "@/components/ui/button";
-import AuthLoginButton from "@/features/auth/auth-login-button/auth-login-button";
 import { useAuthLoginButton } from "@/features/auth/auth-login-button/auth-login-button.hooks";
 import AuthLogoutButton from "@/features/auth/auth-logout-button/auth-logout-button";
 import { useAuthSignupButton } from "@/features/auth/auth-signup-button/auth-signup-button.hooks";
