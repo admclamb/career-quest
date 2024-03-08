@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { useBoard } from "./board.hooks";
 import PageLoader from "@/components/loader/page-loader/page-loader";
 import InterviewBoard from "@/features/board/interveiw-board/interview-board";
@@ -17,6 +17,7 @@ const Board = () => {
     <LayoutSidebar board={board}>
       <ErrorAlertFixed error={error} showClose />
       {board ? <InterviewBoard board={board} /> : null}
+      <Outlet />
     </LayoutSidebar>
   ) : null;
 };

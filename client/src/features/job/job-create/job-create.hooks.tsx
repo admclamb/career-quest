@@ -3,17 +3,20 @@ import { CompanyModel } from "@/models/company-model";
 import { jobService } from "@/services/job-service";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const initialJob = {
   name: "",
 };
 
-export const useJobCreate = (column: BoardColumnModel) => {
+export const useJobCreate = (columnId: number) => {
   const [company, setCompany] = useState<CompanyModel>(initialJob);
   const [jobTitle, setJobTitle] = useState<string>("");
 
   const { getAccessTokenSilently } = useAuth0();
+  const navigate = useNavigate();
+  const { boardId } = useParams();
   const {
     mutate: createJob,
     error,
@@ -21,7 +24,6 @@ export const useJobCreate = (column: BoardColumnModel) => {
     isPending: isLoading,
   } = useMutation({
     mutationFn: async () => {
-      console.log("HERE");
       if (!company) {
         throw new Error("Company is required");
       }
@@ -29,7 +31,7 @@ export const useJobCreate = (column: BoardColumnModel) => {
 
       return jobService.createJob(
         accessToken,
-        column.id,
+        columnId,
         company.name,
         jobTitle
       );
@@ -40,11 +42,15 @@ export const useJobCreate = (column: BoardColumnModel) => {
     setJobTitle(value);
   };
 
+  const closeJob = useCallback(() => {
+    navigate(`/dashboard/board/${boardId}`);
+  }, [boardId, navigate]);
+
   useEffect(() => {
     if (data) {
-      console.log(data);
+      closeJob();
     }
-  }, [data]);
+  }, [closeJob, data]);
 
   return {
     error,
@@ -54,5 +60,6 @@ export const useJobCreate = (column: BoardColumnModel) => {
     createJob,
     jobTitle,
     changeJobTitle,
+    closeJob,
   };
 };

@@ -5,15 +5,16 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import JobCreate from "@/features/job/job-create/job-create";
 import { BoardColumnModel } from "@/models/board-column-model";
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, Plus } from "lucide-react";
+import { useBoardColumnHeader } from "./board-column-header.hooks";
 
 type Props = {
   column: BoardColumnModel;
 };
 
 const BoardColumnHeader = ({ column }: Props) => {
+  const { addJob } = useBoardColumnHeader(column);
   return (
     <div className="p-3 flex flex-col gap-5">
       <div className="flex justify-between items-center gap-7">
@@ -30,7 +31,9 @@ const BoardColumnHeader = ({ column }: Props) => {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <JobCreate column={column} />
+      <Button variant="outline" className="drop-shadow py-1" onClick={addJob}>
+        <Plus size={18} />
+      </Button>
     </div>
   );
 };
