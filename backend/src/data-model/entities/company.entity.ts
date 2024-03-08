@@ -2,7 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -22,7 +22,7 @@ export class Company {
   @Column({ nullable: true })
   imageUrl: string;
 
-  @ManyToOne(() => Job, (job) => job.company)
+  @OneToMany(() => Job, (job) => job.company)
   jobs: Promise<Job>;
 
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })

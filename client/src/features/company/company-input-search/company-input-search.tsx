@@ -24,11 +24,11 @@ const CompanyInputSearch = ({ company, setCompany }: Props) => {
         value={company.name}
         onChange={(e) => changeCompany(e.target.value)}
       />
-      <CompanyInputSearchSuggestions
+      {/* <CompanyInputSearchSuggestions
         companySuggestions={companySuggestions}
         setCompany={setCompany}
         setCompanySuggestions={setCompanySuggestions}
-      />
+      /> */}
     </div>
   );
 };

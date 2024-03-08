@@ -1,4 +1,5 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { ErrorModel } from "@/models/error-model";
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
 const axiosApi = axios.create({
   baseURL: import.meta.env.VITE_API_SERVER_URL ?? "",
@@ -8,8 +9,32 @@ const axiosApi = axios.create({
 const callExternalApi = async <T>(options: {
   config: AxiosRequestConfig;
 }): Promise<T> => {
-  const response: AxiosResponse = await axiosApi(options.config);
-  return response.data;
+  try {
+    const response: AxiosResponse = await axiosApi(options.config);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError;
+
+      const { response } = axiosError;
+
+      let message = "http request failed";
+
+      if (response && response.statusText) {
+        message = response.statusText;
+      }
+
+      if (axiosError.message) {
+        message = axiosError.message;
+      }
+
+      if (response && response.data && (response.data as ErrorModel).message) {
+        message = (response.data as ErrorModel).message;
+      }
+
+      throw new Error(message);
+    }
+  }
 };
 
 const api = {

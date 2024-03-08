@@ -31,4 +31,26 @@ export class CompanyService {
       entityName,
     );
   }
+
+  async findOrCreate(companyName: string): Promise<Company> {
+    const foundCompany = await this.findOneByName(companyName);
+
+    if (foundCompany) {
+      return foundCompany;
+    }
+
+    const company = this.companyService.create({
+      name: companyName,
+    });
+
+    return company;
+  }
+
+  findOneByName(companyName: string): Promise<Company> {
+    if (!companyName) {
+      return null;
+    }
+
+    return this.companyService.findOneBy({ name: companyName });
+  }
 }

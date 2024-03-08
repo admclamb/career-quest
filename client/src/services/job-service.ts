@@ -1,18 +1,19 @@
 import { JobModel } from "@/models/job-model";
 import { AxiosRequestConfig } from "axios";
 import api from "./api";
-
 const createJob = (
   accessToken: string,
-  job: object,
-  companyName?: string
+  columnId: number,
+  companyName: string,
+  jobTitle: string
 ): Promise<JobModel> => {
   const config: AxiosRequestConfig = {
     url: "/api/v1/job",
     method: "POST",
     data: {
-      job,
+      columnId,
       companyName,
+      jobTitle,
     },
     headers: {
       "content-type": "application/json",

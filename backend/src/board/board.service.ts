@@ -18,7 +18,7 @@ export class BoardService {
     const board = new Board();
     board.title = createBoardDto.title;
     board.userSub = userSub;
-    board.columns = this.initDefaultColumns();
+    board.columns = this.initDefaultColumns(userSub);
 
     return this.boardRepository.save(board);
   }
@@ -48,26 +48,31 @@ export class BoardService {
     return Pagination.paginate<Board>(queryBuilder, paginationDto, entityName);
   }
 
-  private initDefaultColumns(): BoardColumn[] {
+  private initDefaultColumns(userSub: string): BoardColumn[] {
     const whishlistColumn = new BoardColumn();
     whishlistColumn.label = 'Wishlist';
     whishlistColumn.order = 0;
+    whishlistColumn.userSub = userSub;
 
     const appliedColumn = new BoardColumn();
     appliedColumn.label = 'Applied';
     appliedColumn.order = 1;
+    appliedColumn.userSub = userSub;
 
     const interviewColumn = new BoardColumn();
     interviewColumn.label = 'Interview';
     interviewColumn.order = 2;
+    interviewColumn.userSub = userSub;
 
     const offerColumn = new BoardColumn();
     offerColumn.label = 'Offer';
     offerColumn.order = 3;
+    offerColumn.userSub = userSub;
 
     const rejectedColumn = new BoardColumn();
     rejectedColumn.label = 'Rejected';
     rejectedColumn.order = 4;
+    rejectedColumn.userSub = userSub;
 
     return [
       whishlistColumn,

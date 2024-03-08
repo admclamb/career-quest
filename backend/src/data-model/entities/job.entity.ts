@@ -2,9 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToMany,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -16,7 +14,7 @@ export class Job {
   @PrimaryGeneratedColumn('identity')
   id: number;
 
-  @OneToMany(() => Company, (company) => company.jobs)
+  @ManyToOne(() => Company, (company) => company.jobs)
   company: Company;
 
   @Column({ nullable: false })
@@ -30,6 +28,9 @@ export class Job {
 
   @ManyToOne(() => BoardColumn, (column) => column.jobs)
   column: Promise<BoardColumn>;
+
+  @Column({ nullable: false })
+  userSub: string;
 
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;

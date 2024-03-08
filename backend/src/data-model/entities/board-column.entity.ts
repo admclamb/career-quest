@@ -26,6 +26,9 @@ export class BoardColumn {
   @ManyToOne(() => Board, (board) => board.columns)
   board: Promise<Board>;
 
+  @Column({ nullable: false })
+  userSub: string;
+
   @OneToMany(() => Job, (job) => job.column)
   jobs: Job[];
 }
