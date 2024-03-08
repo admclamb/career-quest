@@ -2,13 +2,15 @@ import { JobModel } from "@/models/job-model";
 import { jobService } from "@/services/job-service";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useQuery } from "@tanstack/react-query";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export const useJobView = () => {
   const { boardId, jobId } = useParams();
   const { getAccessTokenSilently } = useAuth0();
   const navigate = useNavigate();
+
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const getJob = async (): Promise<JobModel> => {
     if (!jobId) {
@@ -32,5 +34,9 @@ export const useJobView = () => {
     queryFn: getJob,
   });
 
-  return { closeJob, job, isLoading, error };
+  const toggleEditing = () => {
+    setIsEditing((curr) => !curr);
+  };
+
+  return { closeJob, job, isLoading, error, isEditing, toggleEditing };
 };

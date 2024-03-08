@@ -30,7 +30,7 @@ export class BoardService {
 
     return this.boardRepository.findOne({
       where: { id: boardId },
-      relations: relations,
+      relations,
     });
   }
 

@@ -26,11 +26,16 @@ export class JobService {
     return this.jobRepository.save(job);
   }
 
-  findOneById(id: number): Promise<Job> {
+  findOneById(id: number, relations: string[]): Promise<Job> {
     if (!id) {
       return null;
     }
 
-    return this.jobRepository.findOneBy({ id });
+    return this.jobRepository.findOne({
+      where: {
+        id,
+      },
+      relations,
+    });
   }
 }

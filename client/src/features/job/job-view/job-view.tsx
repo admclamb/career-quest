@@ -1,12 +1,13 @@
-import PageLoader from "@/components/loader/page-loader/page-loader";
 import { useJobView } from "./job-view.hooks";
 import { Button } from "@/components/ui/button";
 import ErrorAlertFixed from "@/errors/error-alert-fixed/error-alert-fixed";
 import { X } from "lucide-react";
 import Loader from "@/components/loader/loader";
+import JobViewEdit from "./job-view-edit/job-view-edit";
 
 const JobView = () => {
-  const { closeJob, job, error, isLoading } = useJobView();
+  const { closeJob, job, error, isLoading, isEditing, toggleEditing } =
+    useJobView();
   return (
     <>
       <div
@@ -15,11 +16,13 @@ const JobView = () => {
       ></div>
       <ErrorAlertFixed error={error} showClose />
 
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background rounded p-5 z-[100] flex flex-col gap-5 w-[50%]">
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background rounded p-5 z-[100] flex flex-col gap-5 w-[30%]">
         {isLoading ? (
           <div className="h-[10vh] flex justify-center items-center">
             <Loader />
           </div>
+        ) : isEditing ? (
+          <JobViewEdit job={job} />
         ) : (
           <>
             <div className="flex gap-5 items-center">
@@ -33,7 +36,24 @@ const JobView = () => {
               </Button>
             </div>
             <div className="flex flex-col gap-5">
-              <div className="flex flex-col gap-3"></div>
+              <div className="flex flex-col gap-3">
+                <p className="font-semibold">Job Title</p>
+                <p className="text-muted-foreground">
+                  {job?.jobTitle ?? "No Job Title Available"}
+                </p>
+              </div>
+              <div className="flex flex-col gap-3">
+                <p className="font-semibold">Company</p>
+                <p className="text-muted-foreground">
+                  {job?.company?.name ?? "No Company Available"}
+                </p>
+              </div>
+              <div className="flex flex-col gap-3">
+                <p className="font-semibold">Description</p>
+                <p className="text-muted-foreground">
+                  {job?.description ?? "No Job Description Available"}
+                </p>
+              </div>
             </div>
             <div className="flex gap-5"></div>
           </>

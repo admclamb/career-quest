@@ -51,6 +51,6 @@ export class CompanyService {
       return null;
     }
 
-    return this.companyService.findOneBy({ name: companyName });
+    return this.companyService.findOne({ where: { name: companyName } });
   }
 }

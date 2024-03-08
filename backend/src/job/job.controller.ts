@@ -36,7 +36,7 @@ export class JobController {
       );
     }
 
-    const foundJob = await this.jobService.findOneById(jobId);
+    const foundJob = await this.jobService.findOneById(jobId, ['company']);
 
     if (!foundJob) {
       throw new HttpException('Job not found.', HttpStatus.NOT_FOUND);
@@ -79,8 +79,6 @@ export class JobController {
         );
       }
     }
-
-    console.log(foundCompany, foundBoardColumn);
 
     return this.jobService.createJob(
       createJobDto.jobTitle,
