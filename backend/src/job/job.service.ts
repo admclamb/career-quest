@@ -10,7 +10,7 @@ export class JobService {
     private readonly jobRepository: Repository<Job>,
   ) {}
 
-  async createJob(
+  createJob(
     jobTitle: string,
     userSub: string,
     company: Company,
@@ -24,5 +24,13 @@ export class JobService {
     });
 
     return this.jobRepository.save(job);
+  }
+
+  findOneById(id: number): Promise<Job> {
+    if (!id) {
+      return null;
+    }
+
+    return this.jobRepository.findOneBy({ id });
   }
 }

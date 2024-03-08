@@ -1,9 +1,11 @@
 import {
   Body,
   Controller,
+  Get,
   HttpException,
   HttpStatus,
   Post,
+  Query,
   Req,
   UseGuards,
 } from '@nestjs/common';
@@ -22,6 +24,30 @@ export class JobController {
     private readonly companyService: CompanyService,
     private readonly boardColumnService: BoardColumnService,
   ) {}
+
+  @UseGuards(AuthorizationGuard)
+  @Get('find')
+  async findJob(@Query() { jobId }, @Req() request: Request): Promise<Job> {
+    const userSub = request.auth.payload.sub;
+    if (!userSub) {
+      throw new HttpException(
+        'A user sub is required.',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const foundJob = await this.jobService.findOneById(jobId);
+
+    if (!foundJob) {
+      throw new HttpException('Job not found.', HttpStatus.NOT_FOUND);
+    }
+
+    if (foundJob.userSub !== userSub) {
+      throw new HttpException('You do not own this job.', HttpStatus.CONFLICT);
+    }
+
+    return foundJob;
+  }
 
   @UseGuards(AuthorizationGuard)
   @Post()

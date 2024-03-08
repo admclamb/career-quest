@@ -1,17 +1,10 @@
 import ErrorAlertFixed from "@/errors/error-alert-fixed/error-alert-fixed";
 import { useJobCreate } from "./job-create.hooks";
 import { Button } from "@/components/ui/button";
-import { Plus, X } from "lucide-react";
-import { BoardColumnModel } from "@/models/board-column-model";
+import { X } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import CompanyInputSearch from "@/features/company/company-input-search/company-input-search";
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-} from "@/components/ui/dialog";
 
 type Props = {
   columnId: number;

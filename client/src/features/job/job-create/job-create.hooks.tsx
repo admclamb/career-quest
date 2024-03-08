@@ -1,4 +1,3 @@
-import { BoardColumnModel } from "@/models/board-column-model";
 import { CompanyModel } from "@/models/company-model";
 import { jobService } from "@/services/job-service";
 import { useAuth0 } from "@auth0/auth0-react";

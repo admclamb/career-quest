@@ -10,10 +10,10 @@ const BoardColumn = ({ column }: Props) => {
   return (
     <div className="border-r w-80 h-full">
       <BoardColumnHeader column={column} />
-      <ul className="flex flex-col p-3">
+      <ul className="flex flex-col p-3 gap-3">
         {column?.jobs.map((job) => (
           <li key={job.id}>
-            <BoardColumnJob job={job} />
+            <BoardColumnJob job={job} column={column} />
           </li>
         ))}
       </ul>

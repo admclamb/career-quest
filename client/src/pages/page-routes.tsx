@@ -5,6 +5,7 @@ import { AuthenticationGuard } from "@/guards/authentication-guard";
 import Dashboard from "./dashboard/dashboard";
 import Board from "./dashboard/board/board";
 import AddJob from "./dashboard/board/add-job/add-job";
+import Job from "./dashboard/board/job/job";
 
 const PageRoutes = () => {
   return (
@@ -15,7 +16,11 @@ const PageRoutes = () => {
         element={<AuthenticationGuard component={Board} />}
       >
         <Route
-          path=":columnId/add-job"
+          path="column/:columnId/job/:jobId"
+          element={<AuthenticationGuard component={Job} />}
+        />
+        <Route
+          path="column/:columnId/add-job"
           element={<AuthenticationGuard component={AddJob} />}
         />
       </Route>
