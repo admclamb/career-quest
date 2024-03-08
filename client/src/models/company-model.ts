@@ -1,6 +1,6 @@
 export interface CompanyModel {
-  id: number;
+  id?: number;
   name: string;
-  isVerified: boolean;
-  imageUrl: string;
+  isVerified?: boolean;
+  imageUrl?: string;
 }

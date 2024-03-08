@@ -21,11 +21,11 @@ type Props = {
 };
 
 const JobCreate = ({ column }: Props) => {
-  const { error, setError, isLoading, company, setCompany } = useJobCreate();
+  const { error, company, setCompany, createJob } = useJobCreate(column);
 
   return (
     <>
-      <ErrorAlertFixed error={error} setError={setError} showClose />
+      <ErrorAlertFixed error={error} showClose />
       <AlertDialog>
         <AlertDialogTrigger asChild>
           <Button variant="outline" className="drop-shadow py-1">
@@ -45,7 +45,9 @@ const JobCreate = ({ column }: Props) => {
           </div>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction>Save Job</AlertDialogAction>
+            <AlertDialogAction onClick={() => createJob}>
+              Save Job
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

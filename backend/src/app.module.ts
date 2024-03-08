@@ -5,6 +5,7 @@ import { BoardModule } from './board/board.module';
 import entities from './data-model/entities';
 import { CommonModule } from './common/common.module';
 import { JobModule } from './job/job.module';
+import { CompanyModule } from './company/company.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { JobModule } from './job/job.module';
     BoardModule,
     CommonModule,
     JobModule,
+    CompanyModule,
   ],
   controllers: [],
   providers: [],
