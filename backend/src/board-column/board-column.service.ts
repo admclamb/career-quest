@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BoardColumn } from 'src/data-model/entities';
+import { Board, BoardColumn } from 'src/data-model/entities';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class BoardColumnService {
   constructor(
     @InjectRepository(BoardColumn)
-    private readonly boardRepository: Repository<BoardColumn>,
+    private readonly boardColumnRepository: Repository<BoardColumn>,
   ) {}
 
   findOneById(
@@ -18,13 +18,31 @@ export class BoardColumnService {
       return null;
     }
 
-    return this.boardRepository.findOne({
+    return this.boardColumnRepository.findOne({
       where: { id: boardColumnId },
       relations,
     });
   }
 
+  create(
+    board: Board,
+    userSub: string,
+    label: string,
+    order: number,
+  ): Promise<BoardColumn> {
+    const column = this.boardColumnRepository.create({
+      board,
+      userSub,
+      label,
+      order,
+    });
+
+    console.log(column);
+
+    return this.boardColumnRepository.save(column);
+  }
+
   deleteById(id: number) {
-    return this.boardRepository.delete(id);
+    return this.boardColumnRepository.delete(id);
   }
 }

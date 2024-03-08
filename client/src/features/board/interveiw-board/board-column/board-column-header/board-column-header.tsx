@@ -27,11 +27,7 @@ const BoardColumnHeader = ({ column }: Props) => {
         icon={<Check size={16} />}
       />
       <ErrorAlertFixed error={error} showClose />
-      <AlertLoading
-        isLoading={isPending}
-        header="Loading"
-        message="Loading, just one moment..."
-      />
+      <AlertLoading isLoading={isPending} />
       <div className="flex justify-between items-center gap-7">
         <p>🚀</p>
         <h6 className="font-semibold">{column.label}</h6>

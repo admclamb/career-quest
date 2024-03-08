@@ -18,15 +18,14 @@ const AlertInformation = ({ header, message, icon }: Props) => {
   }
 
   return isOpen ? (
-    <Alert className="fixed top-5 left-1/2 -translate-x-1/2">
+    <Alert className="fixed flex items-center gap-3 top-5 left-1/2 -translate-x-1/2 w-fit z-[100]">
       {icon ? icon : null}
-      <AlertTitle>{header}</AlertTitle>
-      <AlertDescription>{message}</AlertDescription>
-      <Button
-        variant="ghost"
-        className="w-10 h-10"
-        onClick={() => setIsOpen(false)}
-      >
+      <div>
+        <AlertTitle>{header}</AlertTitle>
+        <AlertDescription>{message}</AlertDescription>
+      </div>
+
+      <Button variant="ghost" onClick={() => setIsOpen(false)}>
         <X size={16} />
       </Button>
     </Alert>

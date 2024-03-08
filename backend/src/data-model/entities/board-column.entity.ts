@@ -23,8 +23,8 @@ export class BoardColumn {
   @Column({ nullable: false })
   order: number;
 
-  @ManyToOne(() => Board, (board) => board.columns)
-  board: Promise<Board>;
+  @ManyToOne(() => Board, (board) => board.columns, { cascade: ['update'] })
+  board: Board;
 
   @Column({ nullable: false })
   userSub: string;
