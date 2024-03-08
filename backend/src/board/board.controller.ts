@@ -59,7 +59,11 @@ export class BoardController {
       );
     }
 
-    const response = await this.boardService.findOneById(boardId, ['columns']);
+    const response = await this.boardService.findOneById(boardId, [
+      'columns',
+      'columns.jobs',
+      'columns.jobs.company',
+    ]);
 
     if (!response || response.userSub !== userSub) {
       throw new HttpException('Board not found.', HttpStatus.NOT_FOUND);

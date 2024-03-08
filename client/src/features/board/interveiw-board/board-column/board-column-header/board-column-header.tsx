@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import JobCreate from "@/features/job/job-create/job-create";
 import { BoardColumnModel } from "@/models/board-column-model";
-import { MoreHorizontal, Plus } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 
 type Props = {
   column: BoardColumnModel;
@@ -15,7 +15,7 @@ type Props = {
 
 const BoardColumnHeader = ({ column }: Props) => {
   return (
-    <div className="p-5 flex flex-col gap-5">
+    <div className="p-3 flex flex-col gap-5">
       <div className="flex justify-between items-center gap-7">
         <p>🚀</p>
         <h6 className="font-semibold">{column.label}</h6>

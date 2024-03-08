@@ -54,12 +54,7 @@ export class JobController {
       }
     }
 
-    const job = new Job();
-
-    job.column = Promise.resolve(foundBoardColumn);
-    job.company = foundCompany;
-    job.jobTitle = createJobDto.jobTitle;
-    job.userSub = userSub;
+    console.log(foundCompany, foundBoardColumn);
 
     return this.jobService.createJob(
       createJobDto.jobTitle,

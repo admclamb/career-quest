@@ -20,7 +20,7 @@ export class JobService {
       jobTitle,
       userSub,
       company,
-      column: Promise.resolve(boardColumn),
+      column: boardColumn,
     });
 
     return this.jobRepository.save(job);

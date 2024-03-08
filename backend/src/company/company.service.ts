@@ -43,7 +43,7 @@ export class CompanyService {
       name: companyName,
     });
 
-    return company;
+    return this.companyService.save(company);
   }
 
   findOneByName(companyName: string): Promise<Company> {

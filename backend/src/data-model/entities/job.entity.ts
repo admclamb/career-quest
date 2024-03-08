@@ -14,7 +14,10 @@ export class Job {
   @PrimaryGeneratedColumn('identity')
   id: number;
 
-  @ManyToOne(() => Company, (company) => company.jobs)
+  @ManyToOne(() => Company, (company) => company.jobs, {
+    cascade: true,
+    nullable: false,
+  })
   company: Company;
 
   @Column({ nullable: false })
@@ -26,8 +29,10 @@ export class Job {
   @Column({ nullable: true })
   postUrl: string;
 
-  @ManyToOne(() => BoardColumn, (column) => column.jobs)
-  column: Promise<BoardColumn>;
+  @ManyToOne(() => BoardColumn, (column) => column.jobs, {
+    nullable: false,
+  })
+  column: BoardColumn;
 
   @Column({ nullable: false })
   userSub: string;
