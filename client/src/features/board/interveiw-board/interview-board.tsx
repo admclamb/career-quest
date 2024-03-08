@@ -1,16 +1,16 @@
-import { BoardModel } from "@/models/board-model";
 import BoardColumn from "./board-column/board-column";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import { useInterviewBoard } from "./interview-board.hooks";
+import { useInterviewBoard } from "./inerview-board-provider";
+import PageLoader from "@/components/loader/page-loader/page-loader";
 
-type Props = {
-  board: BoardModel;
-};
+const InterviewBoard = () => {
+  const { addColumn, board, isLoading } = useInterviewBoard();
 
-const InterviewBoard = ({ board }: Props) => {
-  const { addColumn } = useInterviewBoard();
-  return (
+  if (isLoading) {
+    return <PageLoader />;
+  }
+  return board ? (
     <ul className="w-full h-full flex items-stretch">
       {board.columns.map((column) => (
         <li key={column.id} className="h-full">
@@ -29,7 +29,7 @@ const InterviewBoard = ({ board }: Props) => {
         </div>
       </li>
     </ul>
-  );
+  ) : null;
 };
 
 export default InterviewBoard;

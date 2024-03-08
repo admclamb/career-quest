@@ -4,10 +4,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useInterviewBoard } from "../../inerview-board-provider";
 
 export const useBoardColumnHeader = (column: BoardColumnModel) => {
   const navigate = useNavigate();
   const { getAccessTokenSilently } = useAuth0();
+  const { refetchBoard } = useInterviewBoard();
   const [message, setMessage] = useState<{ message: string } | null>(null);
 
   const addJob = () => {
@@ -37,6 +39,8 @@ export const useBoardColumnHeader = (column: BoardColumnModel) => {
       if (message) {
         setMessage(message);
       }
+
+      refetchBoard();
     },
   });
 

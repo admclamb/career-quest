@@ -1,3 +1,4 @@
+import { useInterviewBoard } from "@/features/board/interveiw-board/inerview-board-provider";
 import { CompanyModel } from "@/models/company-model";
 import { jobService } from "@/services/job-service";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -14,6 +15,7 @@ export const useJobCreate = (columnId: number) => {
   const [jobTitle, setJobTitle] = useState<string>("");
 
   const { getAccessTokenSilently } = useAuth0();
+  const { refetchBoard } = useInterviewBoard();
   const navigate = useNavigate();
   const { boardId } = useParams();
   const {
@@ -28,12 +30,15 @@ export const useJobCreate = (columnId: number) => {
       }
       const accessToken = await getAccessTokenSilently();
 
-      return jobService.createJob(
+      const job = await jobService.createJob(
         accessToken,
         columnId,
         company.name,
         jobTitle
       );
+
+      refetchBoard();
+      return job;
     },
   });
 

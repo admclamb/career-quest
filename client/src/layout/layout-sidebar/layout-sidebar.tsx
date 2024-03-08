@@ -1,15 +1,15 @@
 import { ReactNode } from "react";
 import Sidebar from "./sidebar/sidebar";
 import InterviewBoardHeader from "@/features/board/interveiw-board/interview-board-header/interview-board-header";
-import { BoardModel } from "@/models/board-model";
+import { useInterviewBoard } from "@/features/board/interveiw-board/inerview-board-provider";
 
 type Props = {
   children?: ReactNode;
   mainClassName?: string;
-  board: BoardModel | null;
 };
 
-const LayoutSidebar = ({ children, board, mainClassName = "" }: Props) => {
+const LayoutSidebar = ({ children, mainClassName = "" }: Props) => {
+  const { board } = useInterviewBoard();
   return (
     <main className={`h-screen flex items-stretch ${mainClassName}`}>
       <Sidebar />
