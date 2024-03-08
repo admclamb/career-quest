@@ -22,7 +22,7 @@ const JobView = () => {
             <Loader />
           </div>
         ) : isEditing ? (
-          <JobViewEdit job={job} />
+          <JobViewEdit job={job} closeJob={closeJob} />
         ) : (
           <>
             <div className="flex gap-5 items-center">

@@ -10,7 +10,7 @@ export const useJobView = () => {
   const { getAccessTokenSilently } = useAuth0();
   const navigate = useNavigate();
 
-  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [isEditing, setIsEditing] = useState<boolean>(true);
 
   const getJob = async (): Promise<JobModel> => {
     if (!jobId) {
