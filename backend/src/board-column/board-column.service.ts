@@ -10,11 +10,21 @@ export class BoardColumnService {
     private readonly boardRepository: Repository<BoardColumn>,
   ) {}
 
-  findOneById(boardColumnId: number): Promise<BoardColumn> {
+  findOneById(
+    boardColumnId: number,
+    relations: string[] = [],
+  ): Promise<BoardColumn> {
     if (!boardColumnId) {
       return null;
     }
 
-    return this.boardRepository.findOneBy({ id: boardColumnId });
+    return this.boardRepository.findOne({
+      where: { id: boardColumnId },
+      relations,
+    });
+  }
+
+  deleteById(id: number) {
+    return this.boardRepository.delete(id);
   }
 }

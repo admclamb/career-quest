@@ -45,7 +45,7 @@ async function bootstrap() {
 
   app.enableCors({
     origin: configService.get<string>('CLIENT_ORIGIN_URL'),
-    methods: ['GET', 'POST', 'PUT'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Authorization', 'Content-Type'],
     maxAge: 86400,
   });
