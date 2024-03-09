@@ -4,6 +4,18 @@ import { Label } from "@/components/ui/label";
 import { JobModel } from "@/models/job-model";
 import { X } from "lucide-react";
 import { useJobViewEdit } from "./job-view-edit.hooks";
+import {
+  BoldItalicUnderlineToggles,
+  MDXEditor,
+  UndoRedo,
+  headingsPlugin,
+  listsPlugin,
+  markdownShortcutPlugin,
+  quotePlugin,
+  thematicBreakPlugin,
+  toolbarPlugin,
+} from "@mdxeditor/editor";
+import "@mdxeditor/editor/style.css";
 
 type Props = {
   job: JobModel | undefined;
@@ -52,11 +64,17 @@ const JobViewEdit = ({ job, closeJob }: Props) => {
         </div>
         <div className="flex flex-col gap-3">
           <Label htmlFor="job-description">Job Description</Label>
-          <Input
-            id="job-description"
-            placeholder="Job Description"
-            value={jobDescription}
-            onChange={(e) => changeJobDescription(e.target.value)}
+          <MDXEditor
+            markdown={jobDescription ?? "# Job Description"}
+            onChange={changeJobDescription}
+            className="border rounded"
+            plugins={[
+              headingsPlugin(),
+              listsPlugin(),
+              quotePlugin(),
+              thematicBreakPlugin(),
+              markdownShortcutPlugin(),
+            ]}
           />
         </div>
       </div>
