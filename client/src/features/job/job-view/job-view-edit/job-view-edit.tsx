@@ -65,8 +65,9 @@ const JobViewEdit = ({ job, closeJob }: Props) => {
         <div className="flex flex-col gap-3">
           <Label htmlFor="job-description">Job Description</Label>
           <MDXEditor
-            markdown={jobDescription ?? "# Job Description"}
+            markdown={jobDescription ?? ""}
             onChange={changeJobDescription}
+            placeholder="Job Description"
             className="border rounded"
             plugins={[
               headingsPlugin(),
