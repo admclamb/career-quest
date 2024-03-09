@@ -26,7 +26,15 @@ export class JobService {
     return this.jobRepository.save(job);
   }
 
-  findOneById(id: number, relations: string[]): Promise<Job> {
+  updateJob(job: Job): Promise<Job> {
+    return this.jobRepository.save(job);
+  }
+
+  deleteJob(jobId: number) {
+    return this.jobRepository.delete(jobId);
+  }
+
+  findOneById(id: number, relations: string[] = []): Promise<Job> {
     if (!id) {
       return null;
     }

@@ -5,17 +5,15 @@ import { JobModel } from "@/models/job-model";
 import { X } from "lucide-react";
 import { useJobViewEdit } from "./job-view-edit.hooks";
 import {
-  BoldItalicUnderlineToggles,
   MDXEditor,
-  UndoRedo,
   headingsPlugin,
   listsPlugin,
   markdownShortcutPlugin,
   quotePlugin,
   thematicBreakPlugin,
-  toolbarPlugin,
 } from "@mdxeditor/editor";
 import "@mdxeditor/editor/style.css";
+import ErrorAlert from "@/errors/error-alert/error-alert";
 
 type Props = {
   job: JobModel | undefined;
@@ -30,9 +28,17 @@ const JobViewEdit = ({ job, closeJob }: Props) => {
     changeCompany,
     jobDescription,
     changeJobDescription,
+    updateJob,
+    isPending,
+    error,
+    deleteJob,
+    isDeletePending,
+    deleteError,
   } = useJobViewEdit(job, closeJob);
   return (
     <>
+      <ErrorAlert error={error} />
+      <ErrorAlert error={deleteError} />
       <div className="flex gap-5 items-center">
         <h3 className="font-semibold text-xl">{job?.jobTitle}</h3>
         <Button
@@ -68,7 +74,7 @@ const JobViewEdit = ({ job, closeJob }: Props) => {
             markdown={jobDescription ?? ""}
             onChange={changeJobDescription}
             placeholder="Job Description"
-            className="border rounded"
+            className="border rounded text-sm"
             plugins={[
               headingsPlugin(),
               listsPlugin(),
@@ -80,7 +86,13 @@ const JobViewEdit = ({ job, closeJob }: Props) => {
         </div>
       </div>
       <div className="flex gap-5">
-        <Button variant="destructive">Delete Job</Button>
+        <Button
+          variant="destructive"
+          disabled={isDeletePending}
+          onClick={() => deleteJob()}
+        >
+          Delete Job
+        </Button>
         <ul className="flex items-center gap-3 ml-auto">
           <li>
             <Button variant="secondary" onClick={closeJob}>
@@ -88,7 +100,9 @@ const JobViewEdit = ({ job, closeJob }: Props) => {
             </Button>
           </li>
           <li>
-            <Button>Save Changes</Button>
+            <Button disabled={isPending} onClick={() => updateJob()}>
+              Save Changes
+            </Button>
           </li>
         </ul>
       </div>

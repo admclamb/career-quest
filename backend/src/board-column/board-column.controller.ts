@@ -96,14 +96,10 @@ export class BoardColumnController {
       );
     }
 
-    const response = await this.boardColumnService.deleteById(
-      deleteColumnDto.columnId,
-    );
-
-    console.log(response);
+    await this.boardColumnService.deleteById(deleteColumnDto.columnId);
 
     return {
-      message: `Column with the name: "${foundColumn.label}" has been successfully deleted`,
+      message: `Column with the name: "${foundColumn.label}" has been successfully deleted.`,
     };
   }
 }

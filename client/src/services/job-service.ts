@@ -25,6 +25,38 @@ const createJob = (
   return api.callExternalApi<JobModel>({ config });
 };
 
+const updateJob = (accessToken: string, job: JobModel): Promise<JobModel> => {
+  const config: AxiosRequestConfig = {
+    url: "/api/v1/job/update",
+    method: "PUT",
+    data: {
+      job,
+    },
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+
+  return api.callExternalApi<JobModel>({ config });
+};
+
+const deleteJob = (accessToken: string, jobId: number): Promise<JobModel> => {
+  const config: AxiosRequestConfig = {
+    url: "/api/v1/job/delete",
+    method: "DELETE",
+    params: {
+      jobId,
+    },
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+
+  return api.callExternalApi<JobModel>({ config });
+};
+
 const findJobById = (accessToken: string, jobId: number): Promise<JobModel> => {
   const config: AxiosRequestConfig = {
     url: "/api/v1/job/find",
@@ -43,6 +75,8 @@ const findJobById = (accessToken: string, jobId: number): Promise<JobModel> => {
 const jobService = {
   createJob,
   findJobById,
+  updateJob,
+  deleteJob,
 };
 
 Object.freeze(jobService);

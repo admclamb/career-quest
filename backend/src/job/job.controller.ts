@@ -1,10 +1,12 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   HttpStatus,
   Post,
+  Put,
   Query,
   Req,
   UseGuards,
@@ -16,6 +18,7 @@ import { Request } from 'express';
 import { Job } from 'src/data-model/entities';
 import { CompanyService } from 'src/company/company.service';
 import { BoardColumnService } from 'src/board-column/board-column.service';
+import { UpdateJobDto } from './dtos/update-job.dto';
 
 @Controller('/v1/job')
 export class JobController {
@@ -47,6 +50,64 @@ export class JobController {
     }
 
     return foundJob;
+  }
+
+  @UseGuards(AuthorizationGuard)
+  @Put('update')
+  async updateJob(
+    @Body() updateJobDto: UpdateJobDto,
+    @Req() request: Request,
+  ): Promise<Job> {
+    const userSub = request.auth.payload.sub;
+    if (!userSub) {
+      throw new HttpException(
+        'A user sub is required.',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const foundJob = await this.jobService.findOneById(updateJobDto.job.id);
+
+    if (!foundJob) {
+      throw new HttpException('Can not find job.', HttpStatus.NOT_FOUND);
+    }
+
+    if (foundJob.userSub !== userSub) {
+      throw new HttpException('You do not own this job', HttpStatus.CONFLICT);
+    }
+
+    return this.jobService.updateJob(updateJobDto.job);
+  }
+
+  @UseGuards(AuthorizationGuard)
+  @Delete('delete')
+  async deleteJob(
+    @Query() { jobId },
+    @Req() request: Request,
+  ): Promise<{ message: string }> {
+    const userSub = request.auth.payload.sub;
+    if (!userSub) {
+      throw new HttpException(
+        'A user sub is required.',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const foundJob = await this.jobService.findOneById(jobId);
+
+    if (!foundJob) {
+      throw new HttpException('Can not find job.', HttpStatus.NOT_FOUND);
+    }
+
+    if (foundJob.userSub !== userSub) {
+      throw new HttpException('You do not own this job', HttpStatus.CONFLICT);
+    }
+
+    await this.jobService.deleteJob(jobId);
+
+    return {
+      message: `Job with the job title: "${foundJob.jobTitle}" has been successfully deleted.`,
+    };
   }
 
   @UseGuards(AuthorizationGuard)

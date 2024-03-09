@@ -21,9 +21,10 @@ export const useJobView = () => {
     return jobService.findJobById(accessToken, +jobId);
   };
 
-  const closeJob = useCallback(() => {
+  const closeJob = () => {
+    console.log("CLOSING JOB");
     navigate(`/dashboard/board/${boardId}`);
-  }, [boardId, navigate]);
+  };
 
   const {
     data: job,
