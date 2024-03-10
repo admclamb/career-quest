@@ -16,6 +16,10 @@ export const useBoardColumnHeader = (column: BoardColumnModel) => {
     navigate(`column/${column.id}/add-job`);
   };
 
+  const changeOrder = () => {
+    navigate(`column/${column.id}/change-order`);
+  };
+
   const {
     mutate: deleteColumn,
     isPending,
@@ -44,5 +48,5 @@ export const useBoardColumnHeader = (column: BoardColumnModel) => {
     },
   });
 
-  return { addJob, deleteColumn, message, error, isPending };
+  return { addJob, changeOrder, deleteColumn, message, error, isPending };
 };

@@ -17,7 +17,7 @@ type Props = {
 };
 
 const BoardColumnHeader = ({ column }: Props) => {
-  const { addJob, deleteColumn, message, isPending, error } =
+  const { addJob, changeOrder, deleteColumn, message, isPending, error } =
     useBoardColumnHeader(column);
   return (
     <div className="p-3 flex flex-col gap-5">
@@ -38,6 +38,9 @@ const BoardColumnHeader = ({ column }: Props) => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
+            <DropdownMenuCheckboxItem onClick={() => changeOrder()}>
+              Change Order
+            </DropdownMenuCheckboxItem>
             <DropdownMenuCheckboxItem
               onClick={() => deleteColumn()}
               disabled={isPending}

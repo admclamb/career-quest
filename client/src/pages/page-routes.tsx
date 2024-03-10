@@ -7,6 +7,7 @@ import Board from "./dashboard/board/board";
 import AddJob from "./dashboard/board/add-job/add-job";
 import Job from "./dashboard/board/job/job";
 import CreateColumn from "./dashboard/board/create-column/create-column";
+import MoveColumn from "./dashboard/board/move-column/move-column";
 
 const PageRoutes = () => {
   return (
@@ -19,6 +20,10 @@ const PageRoutes = () => {
         <Route
           path="create-column"
           element={<AuthenticationGuard component={CreateColumn} />}
+        />
+        <Route
+          path="column/:columnId/change-order"
+          element={<AuthenticationGuard component={MoveColumn} />}
         />
         <Route
           path="column/:columnId/job/:jobId"
