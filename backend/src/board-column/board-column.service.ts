@@ -42,6 +42,19 @@ export class BoardColumnService {
     return this.boardColumnRepository.save(column);
   }
 
+  async updateColumnOrders(boardId: number): Promise<BoardColumn[]> {
+    const columns = await this.boardColumnRepository.find({
+      where: { board: { id: boardId } },
+      order: { order: 'ASC' },
+    });
+
+    for (let index = 0; index < columns.length; index++) {
+      columns[index].order = index;
+    }
+
+    return this.boardColumnRepository.save(columns);
+  }
+
   deleteById(id: number) {
     return this.boardColumnRepository.delete(id);
   }

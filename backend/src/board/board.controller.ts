@@ -70,6 +70,7 @@ export class BoardController {
     }
 
     response.removePrivateProperties();
+    response.sortColumns();
     return response;
   }
 

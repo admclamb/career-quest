@@ -79,7 +79,7 @@ export class BoardColumnController {
 
     const foundColumn = await this.boardColumnService.findOneById(
       deleteColumnDto.columnId,
-      ['jobs'],
+      ['jobs', 'board'],
     );
 
     if (foundColumn.userSub !== userSub) {
@@ -97,6 +97,8 @@ export class BoardColumnController {
     }
 
     await this.boardColumnService.deleteById(deleteColumnDto.columnId);
+
+    await this.boardColumnService.updateColumnOrders(foundColumn.board.id);
 
     return {
       message: `Column with the name: "${foundColumn.label}" has been successfully deleted.`,

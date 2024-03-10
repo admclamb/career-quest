@@ -33,4 +33,8 @@ export class Board {
   public removePrivateProperties() {
     this.userSub = null;
   }
+
+  public sortColumns() {
+    this.columns = this.columns.sort((a, b) => a.order - b.order);
+  }
 }
