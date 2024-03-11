@@ -1,13 +1,41 @@
 import { BoardColumnModel } from "@/models/board-column-model";
-import { useBoardColumnMoveSelect } from "./board-column-move-select.hooks";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 type Props = {
   columns: BoardColumnModel[];
+  columnIndex: number;
+  changeColumnIndex: (value: number) => void;
 };
 
-const BoardColumnMoveSelect = ({ columns }: Props) => {
-  useBoardColumnMoveSelect();
-  return <div>BoardColumnMoveSelect</div>;
+const BoardColumnMoveSelect = ({
+  columns,
+  columnIndex,
+  changeColumnIndex,
+}: Props) => {
+  return (
+    <Select
+      value={`${columnIndex}`}
+      onValueChange={(value: string) => changeColumnIndex(+value)}
+    >
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Column" />
+      </SelectTrigger>
+      <SelectContent className="z-[150]">
+        {columns.map((column, index) => (
+          <SelectItem
+            key={column.id}
+            value={`${index}`}
+          >{`Position ${index} - ${column.label} `}</SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
 };
 
 export default BoardColumnMoveSelect;

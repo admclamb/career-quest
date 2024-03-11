@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useBoardColumnMove } from "./board-column-move.hooks";
 import AlertLoading from "@/components/alert/alert-loading/alert-loading";
 import ErrorAlertFixed from "@/errors/error-alert-fixed/error-alert-fixed";
-import { Select, SelectTrigger } from "@/components/ui/select";
+import BoardColumnMoveSelect from "./board-column-move-select/board-column-move-select";
 
 type Props = {
   boardId: number;
@@ -12,10 +12,11 @@ const BoardColumnMove = ({ boardId }: Props) => {
   const {
     closeColumn,
     updateOrder,
-    currentColumnIndex,
-    changeCurrentColumnIndex,
+    columnIndex,
+    changeColumnIndex,
     error,
     isPending,
+    columns,
   } = useBoardColumnMove(boardId);
   return (
     <>
@@ -29,11 +30,13 @@ const BoardColumnMove = ({ boardId }: Props) => {
         <div>
           <h3 className="font-semibold">Move Column</h3>
         </div>
-        <div className="flex flex-col gap-5">
-          <Select>
-            <SelectTrigger className="w-[180px]" />
-          </Select>
-        </div>
+        {columns?.length ? (
+          <BoardColumnMoveSelect
+            columns={columns}
+            columnIndex={columnIndex}
+            changeColumnIndex={changeColumnIndex}
+          />
+        ) : null}
         <div className="flex gap-5">
           <Button variant="secondary" onClick={closeColumn} className="ml-auto">
             Cancel

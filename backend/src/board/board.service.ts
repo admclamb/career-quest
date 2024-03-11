@@ -48,6 +48,31 @@ export class BoardService {
     return Pagination.paginate<Board>(queryBuilder, paginationDto, entityName);
   }
 
+  async updateColumnOrder(
+    board: Board,
+    columnId: number,
+    newIndex: number,
+  ): Promise<Board> {
+    board.columns.sort((a, b) => a.order - b.order);
+
+    const columnToMoveIndex = board.columns.findIndex(
+      (column) => column.id === columnId,
+    );
+    if (columnToMoveIndex === -1) {
+      throw new Error('Column not found in board');
+    }
+
+    const [columnToMove] = board.columns.splice(columnToMoveIndex, 1);
+
+    board.columns.splice(newIndex, 0, columnToMove);
+
+    board.columns.forEach((column, index) => {
+      column.order = index;
+    });
+
+    return this.boardRepository.save(board);
+  }
+
   private initDefaultColumns(userSub: string): BoardColumn[] {
     const whishlistColumn = new BoardColumn();
     whishlistColumn.label = 'Wishlist';

@@ -34,6 +34,7 @@ const callExternalApi = async <T>(options: {
 
       throw new Error(message);
     }
+    throw error;
   }
 };
 

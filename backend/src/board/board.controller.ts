@@ -5,6 +5,7 @@ import {
   HttpException,
   HttpStatus,
   Post,
+  Put,
   Query,
   Req,
   UseGuards,
@@ -16,6 +17,7 @@ import { Request } from 'express';
 import { PaginationDto } from 'src/common/pagination/dtos/pagination-dto';
 import { PaginationResponse } from 'src/common/pagination/dtos/pagination-response.dto';
 import { Board } from 'src/data-model/entities';
+import { UpdateBoardColumnOrderDto } from './dtos/update-board-column-order.dto';
 
 @Controller('/v1/board')
 export class BoardController {
@@ -72,6 +74,44 @@ export class BoardController {
     response.removePrivateProperties();
     response.sortColumns();
     return response;
+  }
+
+  @UseGuards(AuthorizationGuard)
+  @Put('update/column-order')
+  async updateColumnOrder(
+    @Body() updateBoardColumnOrderDto: UpdateBoardColumnOrderDto,
+    @Req() request: Request,
+  ): Promise<Board> {
+    const userSub = request.auth.payload.sub;
+    if (!userSub) {
+      throw new HttpException(
+        'A user sub is required.',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const board = await this.boardService.findOneById(
+      updateBoardColumnOrderDto.boardId,
+      ['columns'],
+    );
+
+    if (!board || board.userSub !== userSub) {
+      throw new HttpException('Board not found.', HttpStatus.NOT_FOUND);
+    }
+
+    if (
+      !board.columns.find(
+        (column) => column.id !== updateBoardColumnOrderDto.columnId,
+      )
+    ) {
+      throw new HttpException('Board Column not found', HttpStatus.NOT_FOUND);
+    }
+
+    return this.boardService.updateColumnOrder(
+      board,
+      updateBoardColumnOrderDto.columnId,
+      updateBoardColumnOrderDto.columnIndex,
+    );
   }
 
   @UseGuards(AuthorizationGuard)

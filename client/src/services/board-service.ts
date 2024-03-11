@@ -62,10 +62,34 @@ const createBoard = (
   return api.callExternalApi<BoardModel>({ config });
 };
 
+const updateColumnPosition = (
+  accessToken: string,
+  boardId: number,
+  columnId: number,
+  columnIndex: number
+): Promise<BoardModel> => {
+  const config: AxiosRequestConfig = {
+    url: "/api/v1/board/update/column-order",
+    method: "PUT",
+    data: {
+      boardId,
+      columnId,
+      columnIndex,
+    },
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+
+  return api.callExternalApi<BoardModel>({ config });
+};
+
 const boardService = {
   findBoardById,
   getBoards,
   createBoard,
+  updateColumnPosition,
 };
 
 Object.freeze(boardService);
