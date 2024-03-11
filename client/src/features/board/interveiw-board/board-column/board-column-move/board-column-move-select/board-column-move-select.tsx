@@ -23,7 +23,7 @@ const BoardColumnMoveSelect = ({
       value={`${columnIndex}`}
       onValueChange={(value: string) => changeColumnIndex(+value)}
     >
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-full">
         <SelectValue placeholder="Column" />
       </SelectTrigger>
       <SelectContent className="z-[150]">
