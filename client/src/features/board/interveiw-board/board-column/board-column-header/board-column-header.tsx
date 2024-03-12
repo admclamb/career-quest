@@ -11,6 +11,7 @@ import { useBoardColumnHeader } from "./board-column-header.hooks";
 import AlertInformation from "@/components/alert/alert-information/alert-information";
 import ErrorAlertFixed from "@/errors/error-alert-fixed/error-alert-fixed";
 import AlertLoading from "@/components/alert/alert-loading/alert-loading";
+import { useIconSelector } from "@/utils/icon-selector";
 
 type Props = {
   column: BoardColumnModel;
@@ -19,6 +20,11 @@ type Props = {
 const BoardColumnHeader = ({ column }: Props) => {
   const { addJob, changeOrder, deleteColumn, message, isPending, error } =
     useBoardColumnHeader(column);
+
+  const icon = useIconSelector({
+    icon: column?.icon.icon,
+    size: 18,
+  }) ?? <p>🚀</p>;
   return (
     <div className="p-3 flex flex-col gap-5">
       <AlertInformation
@@ -28,8 +34,8 @@ const BoardColumnHeader = ({ column }: Props) => {
       />
       <ErrorAlertFixed error={error} showClose />
       <AlertLoading isLoading={isPending} />
-      <div className="flex justify-between items-center gap-7">
-        <p>🚀</p>
+      <div className="flex justify-between items-center px-2 gap-7">
+        {icon}
         <h6 className="font-semibold">{column.label}</h6>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

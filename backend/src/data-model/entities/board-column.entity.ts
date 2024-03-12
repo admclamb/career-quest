@@ -17,7 +17,7 @@ export class BoardColumn {
   @Column({ nullable: true, length: 50 })
   label: string;
 
-  @OneToMany(() => Icon, (icon) => icon.boardColumns)
+  @ManyToOne(() => Icon, (icon) => icon.boardColumns)
   icon: Icon;
 
   @Column({ nullable: false })

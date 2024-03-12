@@ -65,6 +65,7 @@ export class BoardController {
       'columns',
       'columns.jobs',
       'columns.jobs.company',
+      'columns.icon',
     ]);
 
     if (!response || response.userSub !== userSub) {

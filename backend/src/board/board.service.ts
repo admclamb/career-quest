@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Board, BoardColumn } from 'src/data-model/entities';
-import { Repository } from 'typeorm';
+import { Board, BoardColumn, Icon } from 'src/data-model/entities';
+import { DataSource, Repository } from 'typeorm';
 import { CreateBoardDto } from './dtos/create-board.dto';
 import { PaginationDto } from 'src/common/pagination/dtos/pagination-dto';
 import { PaginationResponse } from 'src/common/pagination/dtos/pagination-response.dto';
@@ -12,13 +12,17 @@ export class BoardService {
   constructor(
     @InjectRepository(Board)
     private readonly boardRepository: Repository<Board>,
+    private readonly dataSource: DataSource,
   ) {}
 
-  createBoard(createBoardDto: CreateBoardDto, userSub: string): Promise<Board> {
+  async createBoard(
+    createBoardDto: CreateBoardDto,
+    userSub: string,
+  ): Promise<Board> {
     const board = new Board();
     board.title = createBoardDto.title;
     board.userSub = userSub;
-    board.columns = this.initDefaultColumns(userSub);
+    board.columns = await this.initDefaultColumns(userSub);
 
     return this.boardRepository.save(board);
   }
@@ -73,31 +77,38 @@ export class BoardService {
     return this.boardRepository.save(board);
   }
 
-  private initDefaultColumns(userSub: string): BoardColumn[] {
+  private async initDefaultColumns(userSub: string): Promise<BoardColumn[]> {
+    const icons = await this.dataSource.getRepository(Icon).find();
+
     const whishlistColumn = new BoardColumn();
     whishlistColumn.label = 'Wishlist';
     whishlistColumn.order = 0;
     whishlistColumn.userSub = userSub;
+    whishlistColumn.icon = icons[0];
 
     const appliedColumn = new BoardColumn();
     appliedColumn.label = 'Applied';
     appliedColumn.order = 1;
     appliedColumn.userSub = userSub;
+    appliedColumn.icon = icons[1];
 
     const interviewColumn = new BoardColumn();
     interviewColumn.label = 'Interview';
     interviewColumn.order = 2;
     interviewColumn.userSub = userSub;
+    interviewColumn.icon = icons[2];
 
     const offerColumn = new BoardColumn();
     offerColumn.label = 'Offer';
     offerColumn.order = 3;
     offerColumn.userSub = userSub;
+    offerColumn.icon = icons[3];
 
     const rejectedColumn = new BoardColumn();
     rejectedColumn.label = 'Rejected';
     rejectedColumn.order = 4;
     rejectedColumn.userSub = userSub;
+    rejectedColumn.icon = icons[4];
 
     return [
       whishlistColumn,

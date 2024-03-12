@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { BoardColumn } from './board-column.entity';
 
 @Entity()
@@ -9,6 +9,6 @@ export class Icon {
   @Column({ nullable: false })
   icon: string;
 
-  @ManyToOne(() => BoardColumn, (boardColumns) => boardColumns.icon)
+  @OneToMany(() => BoardColumn, (boardColumns) => boardColumns.icon)
   boardColumns: Promise<BoardColumn>;
 }
