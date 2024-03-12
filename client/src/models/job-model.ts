@@ -1,3 +1,4 @@
+import { BoardColumnModel } from "./board-column-model";
 import { CompanyModel } from "./company-model";
 
 export interface JobModel {
@@ -8,4 +9,5 @@ export interface JobModel {
   postUrl: string;
   createdAt: Date;
   updatedAt: Date;
+  column?: BoardColumnModel;
 }

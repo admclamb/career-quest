@@ -14,6 +14,7 @@ import {
 } from "@mdxeditor/editor";
 import "@mdxeditor/editor/style.css";
 import ErrorAlert from "@/errors/error-alert/error-alert";
+import JobViewEditMove from "./job-view-edit-move/job-view-edit-move";
 
 type Props = {
   job: JobModel | undefined;
@@ -34,6 +35,8 @@ const JobViewEdit = ({ job, closeJob }: Props) => {
     deleteJob,
     isDeletePending,
     deleteError,
+    columnIndex,
+    changeColumnIndex,
   } = useJobViewEdit(job, closeJob);
   return (
     <>
@@ -85,6 +88,10 @@ const JobViewEdit = ({ job, closeJob }: Props) => {
           />
         </div>
       </div>
+      <JobViewEditMove
+        columnIndex={columnIndex}
+        changeColumnIndex={changeColumnIndex}
+      />
       <div className="flex gap-5">
         <Button
           variant="destructive"

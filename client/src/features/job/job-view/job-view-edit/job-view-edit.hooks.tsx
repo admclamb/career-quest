@@ -20,7 +20,12 @@ export const useJobViewEdit = (
     job?.description ?? ""
   );
   const { getAccessTokenSilently } = useAuth0();
-  const { refetchBoard } = useInterviewBoard();
+  const { refetchBoard, board } = useInterviewBoard();
+  const [columnIndex, setColumnIndex] = useState<number>(0);
+
+  const changeColumnIndex = (value: number) => {
+    setColumnIndex(value);
+  };
 
   const changeJobTitle = (value: string) => {
     setJobTitle(value);
@@ -79,6 +84,9 @@ export const useJobViewEdit = (
       updatedJob.jobTitle = jobTitle;
       updatedJob.company = company;
       updatedJob.description = jobDescription;
+      updatedJob.column = board?.columns.find(
+        (column) => column.order === columnIndex
+      );
 
       await jobService.updateJob(accessToken, updatedJob);
 
@@ -100,5 +108,7 @@ export const useJobViewEdit = (
     deleteJob,
     isDeletePending,
     deleteError,
+    columnIndex,
+    changeColumnIndex,
   };
 };
