@@ -37,6 +37,12 @@ export class Job {
   @Column({ nullable: false })
   userSub: string;
 
+  @Column({ default: false })
+  hasCoverLetter: boolean;
+
+  @Column({ default: false })
+  appliedOnCompanySite: boolean;
+
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
