@@ -6,8 +6,7 @@ import Loader from "@/components/loader/loader";
 import JobViewEdit from "./job-view-edit/job-view-edit";
 
 const JobView = () => {
-  const { closeJob, job, error, isLoading, isEditing, toggleEditing } =
-    useJobView();
+  const { closeJob, job, error, isLoading, isEditing } = useJobView();
   return (
     <>
       <div

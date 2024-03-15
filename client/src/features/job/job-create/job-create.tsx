@@ -5,6 +5,8 @@ import { X } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import CompanyInputSearch from "@/features/company/company-input-search/company-input-search";
+import { Checkbox } from "@/components/ui/checkbox";
+import MarkdownEditor from "@/components/markdown-editor/markdown-editor";
 
 type Props = {
   columnId: number;
@@ -16,8 +18,8 @@ const JobCreate = ({ columnId }: Props) => {
     company,
     setCompany,
     createJob,
-    jobTitle,
-    changeJobTitle,
+    createJobDto,
+    changeCreateJobDto,
     closeJob,
   } = useJobCreate(columnId);
 
@@ -28,7 +30,7 @@ const JobCreate = ({ columnId }: Props) => {
         onClick={closeJob}
       ></div>
       <ErrorAlertFixed error={error} showClose />
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background rounded p-5 z-[100] flex flex-col gap-5 w-[20%]">
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background rounded p-5 z-[100] flex flex-col gap-5 w-full max-w-lg">
         <div className="flex gap-5 items-center">
           <h3 className="font-semibold">Add Job</h3>
           <Button
@@ -46,9 +48,52 @@ const JobCreate = ({ columnId }: Props) => {
             <Input
               id="job title"
               placeholder="Job Title"
-              value={jobTitle}
-              onChange={(e) => changeJobTitle(e.target.value)}
+              value={createJobDto.jobTitle}
+              onChange={(e) => changeCreateJobDto("jobTitle", e.target.value)}
             />
+          </div>
+          <div className="flex flex-col gap-3">
+            <Label htmlFor="job-description">Job Description</Label>
+            <MarkdownEditor
+              markdown={createJobDto.description}
+              onChange={(value: string) =>
+                changeCreateJobDto("description", value)
+              }
+              placeholder="Job Description"
+            />
+          </div>
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="applied-on-company-site"
+              checked={createJobDto.appliedOnCompanySite}
+              onCheckedChange={(checked) =>
+                changeCreateJobDto(
+                  "appliedOnCompanySite",
+                  checked ? true : false
+                )
+              }
+            />
+            <label
+              htmlFor="applied-on-company-site"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Applied on Company Site
+            </label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="has-cover-letter"
+              checked={createJobDto.hasCoverLetter}
+              onCheckedChange={(checked) =>
+                changeCreateJobDto("hasCoverLetter", checked ? true : false)
+              }
+            />
+            <label
+              htmlFor="has-cover-letter"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Used a Cover Letter
+            </label>
           </div>
         </div>
         <div className="flex gap-5">

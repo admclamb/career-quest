@@ -1,5 +1,6 @@
 import { useInterviewBoard } from "@/features/board/interveiw-board/inerview-board-provider";
 import { CompanyModel } from "@/models/company-model";
+import { CreateJobModel } from "@/models/create-job-model";
 import { jobService } from "@/services/job-service";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "@tanstack/react-query";
@@ -7,12 +8,21 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const initialJob = {
+  jobTitle: "",
+  description: "",
+  postUrl: "",
+  columnId: null,
+  hasCoverLetter: false,
+  appliedOnCompanySite: false,
+};
+
+const initialCompany = {
   name: "",
 };
 
 export const useJobCreate = (columnId: number) => {
-  const [company, setCompany] = useState<CompanyModel>(initialJob);
-  const [jobTitle, setJobTitle] = useState<string>("");
+  const [company, setCompany] = useState<CompanyModel>(initialCompany);
+  const [createJobDto, setCreateJobDto] = useState<CreateJobModel>(initialJob);
 
   const { getAccessTokenSilently } = useAuth0();
   const { refetchBoard } = useInterviewBoard();
@@ -34,7 +44,7 @@ export const useJobCreate = (columnId: number) => {
         accessToken,
         columnId,
         company.name,
-        jobTitle
+        createJobDto.jobTitle
       );
 
       refetchBoard();
@@ -42,8 +52,14 @@ export const useJobCreate = (columnId: number) => {
     },
   });
 
-  const changeJobTitle = (value: string) => {
-    setJobTitle(value);
+  const changeCreateJobDto = <K extends keyof CreateJobModel>(
+    key: K,
+    value: CreateJobModel[K]
+  ) => {
+    setCreateJobDto((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
   };
 
   const closeJob = useCallback(() => {
@@ -62,8 +78,8 @@ export const useJobCreate = (columnId: number) => {
     company,
     setCompany,
     createJob,
-    jobTitle,
-    changeJobTitle,
+    createJobDto,
+    changeCreateJobDto,
     closeJob,
   };
 };

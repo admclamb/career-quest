@@ -4,17 +4,9 @@ import { Label } from "@/components/ui/label";
 import { JobModel } from "@/models/job-model";
 import { X } from "lucide-react";
 import { useJobViewEdit } from "./job-view-edit.hooks";
-import {
-  MDXEditor,
-  headingsPlugin,
-  listsPlugin,
-  markdownShortcutPlugin,
-  quotePlugin,
-  thematicBreakPlugin,
-} from "@mdxeditor/editor";
-import "@mdxeditor/editor/style.css";
 import ErrorAlert from "@/errors/error-alert/error-alert";
 import JobViewEditMove from "./job-view-edit-move/job-view-edit-move";
+import MarkdownEditor from "@/components/markdown-editor/markdown-editor";
 
 type Props = {
   job: JobModel | undefined;
@@ -73,18 +65,10 @@ const JobViewEdit = ({ job, closeJob }: Props) => {
         </div>
         <div className="flex flex-col gap-3">
           <Label htmlFor="job-description">Job Description</Label>
-          <MDXEditor
+          <MarkdownEditor
             markdown={jobDescription ?? ""}
-            onChange={changeJobDescription}
-            placeholder="Job Description"
             className="border rounded text-sm max-h-72 overflow-y-auto"
-            plugins={[
-              headingsPlugin(),
-              listsPlugin(),
-              quotePlugin(),
-              thematicBreakPlugin(),
-              markdownShortcutPlugin(),
-            ]}
+            onChange={changeJobDescription}
           />
         </div>
       </div>

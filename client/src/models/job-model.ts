@@ -10,4 +10,6 @@ export interface JobModel {
   createdAt: Date;
   updatedAt: Date;
   column?: BoardColumnModel;
+  hasCoverLetter: boolean;
+  appliedOnCompanySite: boolean;
 }
