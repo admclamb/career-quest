@@ -77,7 +77,7 @@ const JobViewEdit = ({ job, closeJob }: Props) => {
             markdown={jobDescription ?? ""}
             onChange={changeJobDescription}
             placeholder="Job Description"
-            className="border rounded text-sm"
+            className="border rounded text-sm max-h-72 overflow-y-auto"
             plugins={[
               headingsPlugin(),
               listsPlugin(),
