@@ -19,7 +19,6 @@ export const useJobViewEdit = (
   const [jobDescription, setJobDescription] = useState<string>(
     job?.description ?? ""
   );
-  const [usedCoverletter, setUsedCoverLetter] = useState<boolean>(false);
 
   const { getAccessTokenSilently } = useAuth0();
   const { refetchBoard, board } = useInterviewBoard();

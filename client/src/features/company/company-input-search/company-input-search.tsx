@@ -4,7 +4,6 @@ import { CompanyModel } from "@/models/company-model";
 import { Dispatch, SetStateAction } from "react";
 import { useCompanyInputSearch } from "./company-input-search.hooks";
 import ErrorAlert from "@/errors/error-alert/error-alert";
-import CompanyInputSearchSuggestions from "./company-input-search-suggestions/company-input-search-suggestions";
 
 type Props = {
   company: CompanyModel;
@@ -12,8 +11,7 @@ type Props = {
 };
 
 const CompanyInputSearch = ({ company, setCompany }: Props) => {
-  const { changeCompany, companySuggestions, setCompanySuggestions, error } =
-    useCompanyInputSearch(company, setCompany);
+  const { changeCompany, error } = useCompanyInputSearch(company, setCompany);
   return (
     <div className="flex flex-col gap-3 relative">
       <ErrorAlert error={error} />

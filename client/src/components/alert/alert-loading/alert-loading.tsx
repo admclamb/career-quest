@@ -1,7 +1,4 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
-import { X } from "lucide-react";
-import { useState } from "react";
 
 type Props = {
   header?: string;

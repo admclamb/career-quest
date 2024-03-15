@@ -43,7 +43,7 @@ const BoardCreate = () => {
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
-              onClick={createBoard}
+              onClick={() => createBoard()}
               disabled={!title.length || isLoading}
             >
               Continue
