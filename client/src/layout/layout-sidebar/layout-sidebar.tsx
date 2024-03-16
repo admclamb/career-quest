@@ -13,7 +13,7 @@ const LayoutSidebar = ({ children, mainClassName = "" }: Props) => {
     <main className={`h-screen flex items-stretch ${mainClassName}`}>
       {/* <Sidebar /> */}
       <div className="grow overflow-scroll flex flex-col">
-        {board ? <InterviewBoardHeader board={board} /> : null}
+        {board ? <InterviewBoardHeader /> : null}
 
         <div className="overflow-x-scroll grow">{children}</div>
       </div>
