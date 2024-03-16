@@ -1,15 +1,14 @@
-import { BoardModel } from "@/models/board-model";
 import InterviewBoardHeaderNav from "./interview-board-header-nav/interview-board-header-nav";
 import { Link } from "react-router-dom";
 import { buttonVariants } from "@/components/ui/button";
 import AuthLogoutButton from "@/features/auth/auth-logout-button/auth-logout-button";
 import ModeToggle from "@/features/theme/mode-toggle";
+import { useInterviewBoardHeader } from "./interview-board-header.hooks";
+import BoardsDropdown from "@/features/boards/boards-dropdown/boards-dropdown";
 
-type Props = {
-  board: BoardModel;
-};
+const InterviewBoardHeader = () => {
+  const { boards } = useInterviewBoardHeader();
 
-const InterviewBoardHeader = ({ board }: Props) => {
   return (
     <div className="flex justify-between items-center border-b p-3 h-12">
       <ul className="flex items-center gap-5">
@@ -17,7 +16,7 @@ const InterviewBoardHeader = ({ board }: Props) => {
           <InterviewBoardHeaderNav />
         </li>
         <li>
-          <h3 className="font-semibold">{board.title}</h3>
+          <BoardsDropdown boards={boards?.results} />
         </li>
       </ul>
       <ul className="flex items-center gap-3">
