@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <LayoutLanding>
       <Hero />
-      <section className="border-t  bg-slate-100">
+      <section className="border-slate-300 border-t  bg-slate-100">
         <Container className="grid grid-cols-1 lg:grid-cols-2 py-20 gap-20">
           <section className="h-[35rem] w-full overflow-hidden">
             <img
