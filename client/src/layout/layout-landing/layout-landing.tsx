@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import Footer from "../footer/Footer";
 import Container from "../container/container";
 
 type Props = {
