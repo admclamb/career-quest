@@ -17,7 +17,7 @@ export class Board {
   title: string;
 
   @OneToMany(() => BoardColumn, (boardColumn) => boardColumn.board, {
-    cascade: true,
+    cascade: ['insert', 'remove'],
   })
   columns: BoardColumn[];
 

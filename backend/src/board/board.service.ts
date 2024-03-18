@@ -27,7 +27,7 @@ export class BoardService {
     return this.boardRepository.save(board);
   }
 
-  findOneById(boardId: number, relations: string[]): Promise<Board> {
+  findOneById(boardId: number, relations: string[] = []): Promise<Board> {
     if (!boardId) {
       return null;
     }
@@ -75,6 +75,10 @@ export class BoardService {
     });
 
     return this.boardRepository.save(board);
+  }
+
+  deleteById(boardId: number) {
+    return this.boardRepository.delete(boardId);
   }
 
   private async initDefaultColumns(userSub: string): Promise<BoardColumn[]> {

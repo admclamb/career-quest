@@ -28,10 +28,11 @@ export const useBoards = () => {
     isLoading,
     error,
     data: boards,
+    refetch: refetchBoards,
   } = useQuery({
     queryKey: ["boards", page, size],
     queryFn: getBoards,
   });
 
-  return { boards, error, isLoading };
+  return { boards, error, isLoading, refetchBoards };
 };

@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   HttpStatus,
@@ -18,6 +19,7 @@ import { PaginationDto } from 'src/common/pagination/dtos/pagination-dto';
 import { PaginationResponse } from 'src/common/pagination/dtos/pagination-response.dto';
 import { Board } from 'src/data-model/entities';
 import { UpdateBoardColumnOrderDto } from './dtos/update-board-column-order.dto';
+import { DeleteBoardDto } from './dtos/delete-board.dto';
 
 @Controller('/v1/board')
 export class BoardController {
@@ -136,5 +138,37 @@ export class BoardController {
 
     createdBoard.removePrivateProperties();
     return createdBoard;
+  }
+
+  @UseGuards(AuthorizationGuard)
+  @Delete('delete')
+  async deleteBoard(
+    @Query() deleteBoardDto: DeleteBoardDto,
+    @Req() request: Request,
+  ): Promise<{ message: string }> {
+    const userSub = request.auth.payload.sub;
+    if (!userSub) {
+      throw new HttpException(
+        'A user sub is required.',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const foundBoard = await this.boardService.findOneById(
+      deleteBoardDto.boardId,
+    );
+
+    if (foundBoard.userSub !== userSub) {
+      throw new HttpException(
+        'you do not own this board.',
+        HttpStatus.CONFLICT,
+      );
+    }
+
+    await this.boardService.deleteById(deleteBoardDto.boardId);
+
+    return {
+      message: `Column with the name: "${foundBoard.title}" has been successfully deleted.`,
+    };
   }
 }

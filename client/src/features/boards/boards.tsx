@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { formatDate } from "@/utils/format-date";
 import { buttonVariants } from "@/components/ui/button";
+import BoardDelete from "../board/board-delete/board-delete";
 
 const Boards = () => {
-  const { boards, error, isLoading } = useBoards();
+  const { boards, error, isLoading, refetchBoards } = useBoards();
 
   return (
     <div role="feed">
@@ -32,13 +33,14 @@ const Boards = () => {
                     {formatDate(board.createdAt)}
                   </p>
                 </div>
-                <div>
+                <div className="flex justify-between items-center gap-5">
                   <Link
                     to={`board/${board.id}`}
                     className={buttonVariants({ variant: "default" })}
                   >
                     Go to board
                   </Link>
+                  <BoardDelete board={board} refetchBoards={refetchBoards} />
                 </div>
               </Card>
             </li>

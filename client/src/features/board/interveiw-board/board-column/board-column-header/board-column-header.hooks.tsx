@@ -25,6 +25,7 @@ export const useBoardColumnHeader = (column: BoardColumnModel) => {
     isPending,
     error,
   } = useMutation({
+    mutationKey: ["delete-column"],
     mutationFn: async () => {
       const isConfirmed = window.confirm(
         "Are you sure you want to delete this column? This process cannot be undone."

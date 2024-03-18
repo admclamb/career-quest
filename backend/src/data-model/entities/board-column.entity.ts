@@ -29,6 +29,8 @@ export class BoardColumn {
   @Column({ nullable: false })
   userSub: string;
 
-  @OneToMany(() => Job, (job) => job.column)
+  @OneToMany(() => Job, (job) => job.column, {
+    cascade: true,
+  })
   jobs: Job[];
 }

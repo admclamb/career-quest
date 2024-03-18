@@ -62,6 +62,23 @@ const createBoard = (
   return api.callExternalApi<BoardModel>({ config });
 };
 
+const deleteBoard = (
+  accessToken: string,
+  boardId: number
+): Promise<{ message: string }> => {
+  const config: AxiosRequestConfig = {
+    url: "/api/v1/board/delete",
+    method: "DELETE",
+    params: { boardId },
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+
+  return api.callExternalApi<{ message: string }>({ config });
+};
+
 const updateColumnPosition = (
   accessToken: string,
   boardId: number,
@@ -89,6 +106,7 @@ const boardService = {
   findBoardById,
   getBoards,
   createBoard,
+  deleteBoard,
   updateColumnPosition,
 };
 
