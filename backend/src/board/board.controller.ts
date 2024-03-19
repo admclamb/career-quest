@@ -165,7 +165,7 @@ export class BoardController {
       );
     }
 
-    await this.boardService.deleteById(deleteBoardDto.boardId);
+    await this.boardService.remove(foundBoard);
 
     return {
       message: `Column with the name: "${foundBoard.title}" has been successfully deleted.`,

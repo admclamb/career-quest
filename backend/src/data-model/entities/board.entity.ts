@@ -30,6 +30,9 @@ export class Board {
   @UpdateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   updatedAt: Date;
 
+  @Column({ nullable: true })
+  deletedAt: Date;
+
   public removePrivateProperties() {
     this.userSub = null;
   }

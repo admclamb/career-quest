@@ -142,7 +142,7 @@ export class JobController {
     }
 
     return this.jobService.createJob(
-      createJobDto.jobTitle,
+      createJobDto,
       userSub,
       foundCompany,
       foundBoardColumn,

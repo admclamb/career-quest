@@ -33,7 +33,7 @@ export class BoardService {
     }
 
     return this.boardRepository.findOne({
-      where: { id: boardId },
+      where: { id: boardId, deletedAt: null },
       relations,
     });
   }
@@ -48,6 +48,8 @@ export class BoardService {
     queryBuilder.where(`${entityName}.userSub = :userSub`, {
       userSub,
     });
+
+    queryBuilder.andWhere(`${entityName}.deletedAt IS NULL`);
 
     return Pagination.paginate<Board>(queryBuilder, paginationDto, entityName);
   }
@@ -74,6 +76,11 @@ export class BoardService {
       column.order = index;
     });
 
+    return this.boardRepository.save(board);
+  }
+
+  remove(board: Board) {
+    board.deletedAt = new Date();
     return this.boardRepository.save(board);
   }
 

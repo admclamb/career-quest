@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BoardColumn, Company, Job } from 'src/data-model/entities';
 import { Repository } from 'typeorm';
+import { CreateJobDto } from './dtos/create-job.dto';
 
 @Injectable()
 export class JobService {
@@ -11,13 +12,13 @@ export class JobService {
   ) {}
 
   createJob(
-    jobTitle: string,
+    createJobDto: CreateJobDto,
     userSub: string,
     company: Company,
     boardColumn: BoardColumn,
   ): Promise<Job> {
     const job = this.jobRepository.create({
-      jobTitle,
+      ...createJobDto,
       userSub,
       company,
       column: boardColumn,

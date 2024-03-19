@@ -42,9 +42,8 @@ export const useJobCreate = (columnId: number) => {
 
       const job = await jobService.createJob(
         accessToken,
-        columnId,
-        company.name,
-        createJobDto.jobTitle
+        createJobDto,
+        company
       );
 
       refetchBoard();
@@ -71,6 +70,12 @@ export const useJobCreate = (columnId: number) => {
       closeJob();
     }
   }, [closeJob, data]);
+
+  useEffect(() => {
+    if (columnId) {
+      setCreateJobDto((curr) => ({ ...curr, columnId }));
+    }
+  }, []);
 
   return {
     error,
