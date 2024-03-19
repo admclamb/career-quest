@@ -14,6 +14,7 @@ const initialJob = {
   columnId: null,
   hasCoverLetter: false,
   appliedOnCompanySite: false,
+  postURL: "",
 };
 
 const initialCompany = {
@@ -37,6 +38,9 @@ export const useJobCreate = (columnId: number) => {
     mutationFn: async () => {
       if (!company) {
         throw new Error("Company is required");
+      }
+      if (!createJobDto.jobTitle) {
+        throw new Error("A job title is required");
       }
       const accessToken = await getAccessTokenSilently();
 

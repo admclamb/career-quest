@@ -14,6 +14,7 @@ type Props = {
 
 const JobCreate = ({ columnId }: Props) => {
   const {
+    isLoading,
     error,
     company,
     setCompany,
@@ -49,6 +50,8 @@ const JobCreate = ({ columnId }: Props) => {
               id="job title"
               placeholder="Job Title"
               value={createJobDto.jobTitle}
+              required={true}
+              aria-required="true"
               onChange={(e) => changeCreateJobDto("jobTitle", e.target.value)}
             />
           </div>
@@ -60,6 +63,15 @@ const JobCreate = ({ columnId }: Props) => {
                 changeCreateJobDto("description", value)
               }
               placeholder="Job Description"
+            />
+          </div>
+          <div className="flex flex-col gap-3">
+            <Label htmlFor="post-url">Post URL</Label>
+            <Input
+              id="post-url"
+              placeholder="Post URL"
+              value={createJobDto.postURL}
+              onChange={(e) => changeCreateJobDto("postURL", e.target.value)}
             />
           </div>
           <div className="flex items-center space-x-2">
@@ -97,8 +109,13 @@ const JobCreate = ({ columnId }: Props) => {
           </div>
         </div>
         <div className="flex gap-5">
-          <Button type="submit" onClick={() => createJob()} className="ml-auto">
-            Save Job
+          <Button
+            type="submit"
+            onClick={() => createJob()}
+            disabled={isLoading}
+            className="ml-auto"
+          >
+            {isLoading ? "Loading..." : "Save Job"}
           </Button>
         </div>
       </div>

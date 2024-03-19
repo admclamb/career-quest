@@ -31,6 +31,9 @@ export class Board {
   updatedAt: Date;
 
   @Column({ nullable: true })
+  postURL: string;
+
+  @Column({ nullable: true })
   deletedAt: Date;
 
   public removePrivateProperties() {

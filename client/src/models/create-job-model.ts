@@ -5,4 +5,5 @@ export interface CreateJobModel {
   columnId: number | null;
   hasCoverLetter: boolean;
   appliedOnCompanySite: boolean;
+  postURL: string;
 }
