@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
-@RequestMapping("/v1")
+@RequestMapping("/v1/board")
 public class BoardController {
     @Autowired
     BoardService boardService;
