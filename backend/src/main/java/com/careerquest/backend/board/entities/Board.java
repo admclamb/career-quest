@@ -1,13 +1,22 @@
 package com.careerquest.backend.board.entities;
 
-import com.careerquest.backend.db.IdentifiableEntity;
-
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity()
 @Table(name = "board")
-public class Board extends IdentifiableEntity {
+public class Board {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
     private String name;
 
     public String getName() {
