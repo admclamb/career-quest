@@ -1,44 +1,23 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./home/home";
-import NotFound from "./not-found/not-found";
-import { AuthenticationGuard } from "@/guards/authentication-guard";
-import Dashboard from "./dashboard/dashboard";
-import Board from "./dashboard/board/board";
-import AddJob from "./dashboard/board/add-job/add-job";
-import Job from "./dashboard/board/job/job";
-import CreateColumn from "./dashboard/board/create-column/create-column";
-import MoveColumn from "./dashboard/board/move-column/move-column";
+import LandingPage from "./landing/landing.page";
+import NotFoundPage from "./not-found/not-found.page";
+import { AuthenticationGuard } from "@/features/auth/guards/authentication.guard";
+import AccountSetupPage from "./account/setup/account-setup.page";
+import TrackerPage from "./tracker/tracker.page";
 
 const PageRoutes = () => {
   return (
     <Routes>
-      <Route index element={<Home />} />
       <Route
-        path="dashboard/board/:boardId"
-        element={<AuthenticationGuard component={Board} />}
-      >
-        <Route
-          path="create-column"
-          element={<AuthenticationGuard component={CreateColumn} />}
-        />
-        <Route
-          path="column/:columnId/change-order"
-          element={<AuthenticationGuard component={MoveColumn} />}
-        />
-        <Route
-          path="column/:columnId/job/:jobId"
-          element={<AuthenticationGuard component={Job} />}
-        />
-        <Route
-          path="column/:columnId/add-job"
-          element={<AuthenticationGuard component={AddJob} />}
-        />
-      </Route>
-      <Route
-        path="dashboard"
-        element={<AuthenticationGuard component={Dashboard} />}
+        path="account/setup"
+        element={<AuthenticationGuard component={AccountSetupPage} />}
       />
-      <Route path="*" element={<NotFound />} />
+      <Route
+        path="tracker"
+        element={<AuthenticationGuard component={TrackerPage} />}
+      />
+      <Route index element={<LandingPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };
