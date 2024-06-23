@@ -6,22 +6,28 @@ import com.careerquest.backend.board.dto.request.CreateBoardDto;
 import com.careerquest.backend.board.entities.Board;
 import com.careerquest.backend.board.factories.BoardFactory;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
-@RequestMapping("/v1/board")
+@RequiredArgsConstructor
+@RequestMapping("api/v1/board")
 public class BoardController {
-    @Autowired
-    BoardService boardService;
+    private final BoardService boardService;
+    private final BoardFactory boardFactory;
 
-    @Autowired
-    BoardFactory boardFactory;
+    @GetMapping()
+    public String getMethodName() {
+        return "BOI";
+    }
 
-    @PostMapping
-    public String postMethodName(@RequestBody CreateBoardDto createBoardDto) {
+    @PostMapping()
+    public String createBoard(@RequestBody CreateBoardDto createBoardDto) {
+        System.out.println(createBoardDto.getClass());
         Board board = boardService.create(createBoardDto);
 
         return boardFactory.createBoardDtoFromBoard(board).getId();
