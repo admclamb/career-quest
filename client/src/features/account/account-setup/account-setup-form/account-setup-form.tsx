@@ -21,8 +21,11 @@ import { useEffect } from "react";
 import { toast } from "sonner";
 
 const formSchema = z.object({
-  username: z.string().max(50, {
-    message: "Username must be at most 50 characters.",
+  firstName: z.string().max(50, {
+    message: "A first name must be at most 50 characters.",
+  }),
+  lastName: z.string().max(50, {
+    message: "A last name must be at most 50 characters.",
   }),
 });
 
@@ -53,7 +56,8 @@ const AccountSetupForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      firstName: "",
+      lastName: "",
     },
   });
 
@@ -74,16 +78,26 @@ const AccountSetupForm = () => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="username"
+          name="firstName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>First Name</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="First name" {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="lastName"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Last Name</FormLabel>
+              <FormControl>
+                <Input placeholder="Last name" {...field} />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}

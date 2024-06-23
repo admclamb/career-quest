@@ -1,3 +1,4 @@
 export interface CreateAccountDto {
-  username: string;
+  firstName: string;
+  lastName: string;
 }
