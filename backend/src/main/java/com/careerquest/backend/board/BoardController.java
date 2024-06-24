@@ -27,7 +27,6 @@ public class BoardController {
 
     @PostMapping()
     public String createBoard(@RequestBody CreateBoardDto createBoardDto) {
-        System.out.println(createBoardDto.getClass());
         Board board = boardService.create(createBoardDto);
 
         return boardFactory.createBoardDtoFromBoard(board).getId();
