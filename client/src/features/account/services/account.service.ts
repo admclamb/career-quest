@@ -34,9 +34,12 @@ export class AccountService extends Api {
     return this.callExternalApi<string>({ config });
   }
 
-  public getBySub(accessToken: string): Promise<Account> {
+  public getBySub(accessToken: string, sub: string): Promise<Account> {
     const config: AxiosRequestConfig = {
       url: "/api/v1/account/find/sub",
+      params: {
+        sub,
+      },
       headers: {
         "content-type": "application/json",
         Authorization: `Bearer ${accessToken}`,

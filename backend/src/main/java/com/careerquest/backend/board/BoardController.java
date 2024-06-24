@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/board")
+@RequestMapping("/api/v1/board")
 public class BoardController {
     private final BoardService boardService;
     private final BoardFactory boardFactory;

@@ -16,13 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/account")
+@RequestMapping("/api/v1/account")
 public class AccountController {
     private final AccountService accountService;
     private final AccountFactory accountFactory;
 
-    @GetMapping("find/sub")
+    @GetMapping("/find/sub")
     public AccountDto findAccountBySub(@RequestParam String sub) {
+        System.out.println("TESTING");
         Account account = this.accountService.findBySub(sub);
 
         return accountFactory.createAccountDtoFromAccount(account);

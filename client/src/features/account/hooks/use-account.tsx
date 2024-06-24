@@ -7,7 +7,7 @@ import { setError } from "@/slices/error-slice";
 import { AccountService } from "../services/account.service";
 
 export const useAccount = () => {
-  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+  const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
   const dispatch = useAppDispatch();
 
   const response = useQuery({
@@ -17,7 +17,8 @@ export const useAccount = () => {
         const accessToken = await getAccessTokenSilently();
 
         const account = await AccountService.getInstance().getBySub(
-          accessToken
+          accessToken,
+          user?.sub
         );
         return account;
       }
